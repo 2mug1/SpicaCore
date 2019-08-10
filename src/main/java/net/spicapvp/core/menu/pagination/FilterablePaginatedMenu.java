@@ -15,6 +15,7 @@ public abstract class FilterablePaginatedMenu<T> extends PaginatedMenu {
 	@Getter @Setter private int scrollIndex = 0;
 
 	{
+		setAutoUpdate(true);
 		filters = generateFilters();
 	}
 

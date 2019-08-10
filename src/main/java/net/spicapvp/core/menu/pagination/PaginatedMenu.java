@@ -12,6 +12,7 @@ public abstract class PaginatedMenu extends Menu {
 	@Getter private int page = 1;
 
 	{
+		setAutoUpdate(true);
 		setUpdateAfterClick(false);
 	}
 

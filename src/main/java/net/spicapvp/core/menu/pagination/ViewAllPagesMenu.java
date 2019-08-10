@@ -17,6 +17,10 @@ public class ViewAllPagesMenu extends Menu {
 	@Getter
 	PaginatedMenu menu;
 
+	{
+		setAutoUpdate(true);
+	}
+
 	@Override
 	public String getTitle(Player player) {
 		return "Jump to page";
