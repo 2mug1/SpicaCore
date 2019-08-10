@@ -342,7 +342,7 @@ public class SpicaCore extends JavaPlugin {
 
 				SpicaServerStatusAPI.register(name, address, port);
 
-				this.getLogger().info(data + " を登録しました");
+				this.getLogger().info(data + " has been added to cache for server status.");
 			});
 		}
 	}
