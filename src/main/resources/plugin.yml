@@ -1,0 +1,4 @@
+main: SpicaCore
+name: SpicaCore
+version: 1.0
+depend: [RequiresAPI]
