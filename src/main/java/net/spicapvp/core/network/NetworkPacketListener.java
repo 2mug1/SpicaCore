@@ -6,20 +6,23 @@ import net.md_5.bungee.api.chat.HoverEvent;
 import net.spicapvp.core.SpicaCore;
 import net.spicapvp.core.clan.Clan;
 import net.spicapvp.core.clan.ClanPlayer;
-import net.spicapvp.core.network.packet.friend.PacketFriendAccepted;
-import net.spicapvp.core.network.packet.friend.PacketFriendDelete;
-import net.spicapvp.core.network.packet.friend.PacketFriendJoinNetwork;
-import net.spicapvp.core.network.packet.friend.PacketFriendSendRequest;
-import net.spicapvp.core.network.packet.grant.PacketAddGrant;
-import net.spicapvp.core.network.packet.grant.PacketDeleteGrant;
-import net.spicapvp.core.network.packet.punishment.PacketBroadcastPunishment;
-import net.spicapvp.core.network.packet.rank.PacketDeleteRank;
-import net.spicapvp.core.network.packet.rank.PacketRefreshRank;
-import net.spicapvp.core.network.packet.staff.PacketStaffChat;
+import net.spicapvp.core.clan.packet.*;
+import net.spicapvp.core.convenient.packet.PacketClickableBroadcast;
+import net.spicapvp.core.friend.packet.PacketFriendAccepted;
+import net.spicapvp.core.friend.packet.PacketFriendDelete;
+import net.spicapvp.core.friend.packet.PacketFriendJoinNetwork;
+import net.spicapvp.core.friend.packet.PacketFriendSendRequest;
+import net.spicapvp.core.grant.packet.PacketAddGrant;
+import net.spicapvp.core.grant.packet.PacketDeleteGrant;
+import net.spicapvp.core.nametag.NameTagHandler;
+import net.spicapvp.core.nametag.packet.*;
+import net.spicapvp.core.punishment.packet.PacketBroadcastPunishment;
+import net.spicapvp.core.rank.packet.PacketDeleteRank;
+import net.spicapvp.core.rank.packet.PacketRefreshRank;
 import net.spicapvp.core.pidgin.packet.handler.IncomingPacketHandler;
 import net.spicapvp.core.pidgin.packet.listener.PacketListener;
 import net.spicapvp.core.Locale;
-import net.spicapvp.core.network.event.ReceiveStaffChatEvent;
+import net.spicapvp.core.staff.event.ReceiveStaffChatEvent;
 import net.spicapvp.core.profile.Profile;
 import net.spicapvp.core.grant.Grant;
 import net.spicapvp.core.grant.event.GrantAppliedEvent;
@@ -32,10 +35,9 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
+import net.spicapvp.core.staff.packet.*;
 import net.spicapvp.core.util.Style;
 import net.spicapvp.core.util.TimeUtil;
-import net.spicapvp.core.network.packet.clan.*;
-import net.spicapvp.core.network.packet.network.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -321,5 +323,109 @@ public class NetworkPacketListener implements PacketListener {
 								});
 					}
 				});
+	}
+
+	@IncomingPacketHandler
+	public void onPacketAddPrefix(PacketAddPrefix packet){
+		UUID uuid = packet.getUuid();
+
+		Profile profile = Profile.getByUuid(uuid);
+		profile.setPrefix(profile.getPrefix() + packet.getPrefix());
+		profile.save();
+
+		profile.refreshNameTag();
+
+		Player player = Bukkit.getPlayer(uuid);
+
+		if(player != null) {
+			profile.refreshNameTag();
+
+			player.sendMessage("Prefixが追加されました");
+		}
+	}
+
+	@IncomingPacketHandler
+	public void onPacketAddSuffix(PacketAddSuffix packet){
+		UUID uuid = packet.getUuid();
+
+		Profile profile = Profile.getByUuid(uuid);
+		profile.setSuffix(profile.getSuffix() + packet.getSuffix());
+		profile.save();
+
+		Player player = Bukkit.getPlayer(uuid);
+
+		if(player != null) {
+			profile.refreshNameTag();
+
+			player.sendMessage("Suffixが追加されました");
+		}
+	}
+
+	@IncomingPacketHandler
+	public void onPacketSetPrefix(PacketSetPrefix packet){
+		UUID uuid = packet.getUuid();
+
+		Profile profile = Profile.getByUuid(uuid);
+		profile.setPrefix(packet.getPrefix());
+		profile.save();
+
+		Player player = Bukkit.getPlayer(uuid);
+
+		if(player != null) {
+			profile.refreshNameTag();
+
+			player.sendMessage("Prefixが上書きされました");
+		}
+	}
+
+	@IncomingPacketHandler
+	public void onPacketSetSuffix(PacketSetSuffix packet){
+		UUID uuid = packet.getUuid();
+
+		Profile profile = Profile.getByUuid(uuid);
+		profile.setSuffix(packet.getSuffix());
+		profile.save();
+
+		Player player = Bukkit.getPlayer(uuid);
+
+		if(player != null) {
+			profile.refreshNameTag();
+
+			player.sendMessage("Suffixが上書きされました");
+		}
+	}
+
+	@IncomingPacketHandler
+	public void onPacketResetPrefix(PacketResetPrefix packet){
+		UUID uuid = packet.getUuid();
+
+		Profile profile = Profile.getByUuid(uuid);
+		profile.setPrefix(null);
+		profile.save();
+
+		Player player = Bukkit.getPlayer(uuid);
+
+		if(player != null) {
+			profile.refreshNameTag();
+
+			player.sendMessage("Prefixがリセットされました");
+		}
+	}
+
+	@IncomingPacketHandler
+	public void onPacketResetSuffix(PacketResetSuffix packet){
+		UUID uuid = packet.getUuid();
+
+		Profile profile = Profile.getByUuid(uuid);
+		profile.setSuffix(null);
+		profile.save();
+
+		Player player = Bukkit.getPlayer(uuid);
+
+		if(player != null) {
+			profile.refreshNameTag();
+
+			player.sendMessage("Suffixがリセットされました");
+		}
 	}
 }

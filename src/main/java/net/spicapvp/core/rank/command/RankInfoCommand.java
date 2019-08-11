@@ -13,7 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-@CommandMeta(label = "rank info", permission = "spicaCore.admin.rank", async = true)
+@CommandMeta(label = "packet info", permission = "spicaCore.admin.packet", async = true)
 public class RankInfoCommand {
 
 	public void execute(Player player, Rank rank) {

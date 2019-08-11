@@ -5,17 +5,17 @@ import net.spicapvp.core.util.Style;
 import com.qrakn.honcho.command.CommandMeta;
 import org.bukkit.command.CommandSender;
 
-@CommandMeta(label = { "rank removepermission", "rank removeperm", "rank deleteperm", "rank delperm" },
-             permission = "spicaCore.admin.rank",
+@CommandMeta(label = { "packet removepermission", "packet removeperm", "packet deleteperm", "packet delperm" },
+             permission = "spicaCore.admin.packet",
              async = true)
 public class RankRemovePermissionCommand {
 
 	public void execute(CommandSender sender, Rank rank, String permission) {
 		if (!rank.removePermission(permission)) {
-			sender.sendMessage(Style.RED + "That rank does not have that permission.");
+			sender.sendMessage(Style.RED + "That packet does not have that permission.");
 		} else {
 			rank.save();
-			sender.sendMessage(Style.GREEN + "Successfully removed permission from rank.");
+			sender.sendMessage(Style.GREEN + "Successfully removed permission from packet.");
 		}
 	}
 

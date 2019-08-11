@@ -2,7 +2,7 @@ package net.spicapvp.core.grant;
 
 import net.spicapvp.core.SpicaCore;
 import net.spicapvp.core.strap.StrappedListener;
-import net.spicapvp.core.network.packet.grant.PacketDeleteGrant;
+import net.spicapvp.core.grant.packet.PacketDeleteGrant;
 import net.spicapvp.core.profile.Profile;
 import net.spicapvp.core.grant.event.GrantAppliedEvent;
 import net.spicapvp.core.grant.event.GrantExpireEvent;
@@ -29,8 +29,8 @@ public class GrantListener extends StrappedListener {
 		Player player = event.getPlayer();
 		Grant grant = event.getGrant();
 
-		player.sendMessage(Style.GREEN + ("A `{rank}` grant has been applied to you for {time-remaining}.")
-				.replace("{rank}", grant.getRank().getDisplayName())
+		player.sendMessage(Style.GREEN + ("A `{packet}` packet has been applied to you for {time-remaining}.")
+				.replace("{packet}", grant.getRank().getDisplayName())
 				.replace("{time-remaining}", grant.getDuration() == Integer.MAX_VALUE ?
 						"forever" : TimeUtil.millisToRoundedTime((grant.getAddedAt() + grant.getDuration()) -
 						                                         System.currentTimeMillis())));
@@ -44,8 +44,8 @@ public class GrantListener extends StrappedListener {
 		Player player = event.getPlayer();
 		Grant grant = event.getGrant();
 
-		player.sendMessage(Style.RED + ("Your `{rank}` grant has expired.")
-				.replace("{rank}", grant.getRank().getDisplayName()));
+		player.sendMessage(Style.RED + ("Your `{packet}` packet has expired.")
+				.replace("{packet}", grant.getRank().getDisplayName()));
 
 		Profile profile = Profile.getByUuid(player.getUniqueId());
 		profile.setupBukkitPlayer(player);
@@ -53,7 +53,7 @@ public class GrantListener extends StrappedListener {
 
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
-		if (!event.getPlayer().hasPermission("spicaCore.staff.grant")) {
+		if (!event.getPlayer().hasPermission("spicaCore.staff.packet")) {
 			return;
 		}
 
@@ -64,12 +64,12 @@ public class GrantListener extends StrappedListener {
 
 			if (event.getMessage().equalsIgnoreCase("cancel")) {
 				GrantProcedure.getProcedures().remove(procedure);
-				event.getPlayer().sendMessage(Style.RED + "You have cancelled the grant procedure.");
+				event.getPlayer().sendMessage(Style.RED + "You have cancelled the packet procedure.");
 				return;
 			}
 
 			if (procedure.getType() == GrantProcedureType.REMOVE) {
-				new ConfirmMenu(Style.YELLOW + "Delete this grant?", new TypeCallback<Boolean>() {
+				new ConfirmMenu(Style.YELLOW + "Delete this packet?", new TypeCallback<Boolean>() {
 					@Override
 					public void callback(Boolean data) {
 						if (data) {
@@ -78,13 +78,13 @@ public class GrantListener extends StrappedListener {
 							procedure.getGrant().setRemovedReason(event.getMessage());
 							procedure.getGrant().setRemoved(true);
 							procedure.finish();
-							event.getPlayer().sendMessage(Style.GREEN + "The grant has been removed.");
+							event.getPlayer().sendMessage(Style.GREEN + "The packet has been removed.");
 
 							SpicaCore.get().getPidgin().sendPacket(new PacketDeleteGrant(procedure.getRecipient().getUuid(),
 									procedure.getGrant()));
 						} else {
 							procedure.cancel();
-							event.getPlayer().sendMessage(Style.RED + "You did not confirm to remove the grant.");
+							event.getPlayer().sendMessage(Style.RED + "You did not confirm to remove the packet.");
 						}
 					}
 				}, true) {
@@ -92,7 +92,7 @@ public class GrantListener extends StrappedListener {
 					public void onClose(Player player) {
 						if (!isClosedByMenu()) {
 							procedure.cancel();
-							event.getPlayer().sendMessage(Style.RED + "You did not confirm to remove the grant.");
+							event.getPlayer().sendMessage(Style.RED + "You did not confirm to remove the packet.");
 						}
 					}
 				}.openMenu(event.getPlayer());

@@ -2,7 +2,7 @@ package net.spicapvp.core.friend.command;
 
 import com.qrakn.honcho.command.CommandMeta;
 import net.spicapvp.core.SpicaCore;
-import net.spicapvp.core.network.packet.friend.PacketFriendAccepted;
+import net.spicapvp.core.friend.packet.PacketFriendAccepted;
 import net.spicapvp.core.profile.Profile;
 import net.spicapvp.core.util.Style;
 import org.bukkit.Sound;

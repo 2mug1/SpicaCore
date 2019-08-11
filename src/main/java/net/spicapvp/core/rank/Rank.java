@@ -1,8 +1,8 @@
 package net.spicapvp.core.rank;
 
 import net.spicapvp.core.SpicaCore;
-import net.spicapvp.core.network.packet.rank.PacketDeleteRank;
-import net.spicapvp.core.network.packet.rank.PacketRefreshRank;
+import net.spicapvp.core.rank.packet.PacketDeleteRank;
+import net.spicapvp.core.rank.packet.PacketRefreshRank;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.ReplaceOptions;
@@ -209,22 +209,22 @@ public class Rank {
 	}
 
 	/**
-	 * Retrieves a rank by UUID if one exists.
+	 * Retrieves a packet by UUID if one exists.
 	 *
 	 * @param uuid The UUID.
 	 *
-	 * @return A rank that matches the given UUID if found.
+	 * @return A packet that matches the given UUID if found.
 	 */
 	public static Rank getRankByUuid(UUID uuid) {
 		return ranks.get(uuid);
 	}
 
 	/**
-	 * Retrieves a rank by name if one exists.
+	 * Retrieves a packet by name if one exists.
 	 *
 	 * @param name The name.
 	 *
-	 * @return A rank that matches the given name if found.
+	 * @return A packet that matches the given name if found.
 	 */
 	public static Rank getRankByDisplayName(String name) {
 		for (Rank rank : ranks.values()) {
@@ -237,9 +237,9 @@ public class Rank {
 	}
 
 	/**is
-	 * Retrieves the default rank or creates a new default rank if one does not already exist.
+	 * Retrieves the default packet or creates a new default packet if one does not already exist.
 	 *
-	 * @return A default rank, or a new default rank if unavailable.
+	 * @return A default packet, or a new default packet if unavailable.
 	 */
 	public static Rank getDefaultRank() {
 		for (Rank rank : ranks.values()) {

@@ -6,7 +6,7 @@ import net.spicapvp.core.util.Style;
 import com.qrakn.honcho.command.CommandMeta;
 import org.bukkit.command.CommandSender;
 
-@CommandMeta(label = "rank delete", permission = "spicaCore.admin.rank", async = true)
+@CommandMeta(label = "packet delete", permission = "spicaCore.admin.packet", async = true)
 public class RankDeleteCommand {
 
 	public void execute(CommandSender sender, Rank rank) {
@@ -17,7 +17,7 @@ public class RankDeleteCommand {
 
 		rank.delete();
 
-		sender.sendMessage(Style.GREEN + "You deleted the rank.");
+		sender.sendMessage(Style.GREEN + "You deleted the packet.");
 	}
 
 }

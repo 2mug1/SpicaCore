@@ -6,7 +6,7 @@ import net.spicapvp.core.clan.Clan;
 import net.spicapvp.core.clan.ClanPlayer;
 import net.spicapvp.core.clan.ClanPlayerProcedureStage;
 import net.spicapvp.core.clan.ClanPlayerRole;
-import net.spicapvp.core.network.packet.clan.PacketClanInvite;
+import net.spicapvp.core.clan.packet.PacketClanInvite;
 import net.spicapvp.core.profile.Profile;
 import net.spicapvp.core.util.Style;
 import net.spicapvp.core.util.TimeUtil;

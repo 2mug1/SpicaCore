@@ -4,7 +4,7 @@ import com.qrakn.honcho.command.CommandMeta;
 import net.spicapvp.core.SpicaCore;
 import net.spicapvp.core.clan.Clan;
 import net.spicapvp.core.clan.ClanPlayerRole;
-import net.spicapvp.core.network.packet.clan.PacketClanPlayerRoleChange;
+import net.spicapvp.core.clan.packet.PacketClanPlayerRoleChange;
 import net.spicapvp.core.profile.Profile;
 import net.spicapvp.core.util.Style;
 import net.spicapvp.core.util.TimeUtil;

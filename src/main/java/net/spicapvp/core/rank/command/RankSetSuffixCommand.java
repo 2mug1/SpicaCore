@@ -5,19 +5,19 @@ import net.spicapvp.core.util.Style;
 import com.qrakn.honcho.command.CommandMeta;
 import org.bukkit.command.CommandSender;
 
-@CommandMeta(label = "rank setsuffix", permission = "spicaCore.admin.rank", async = true)
+@CommandMeta(label = "packet setsuffix", permission = "spicaCore.admin.packet", async = true)
 public class RankSetSuffixCommand {
 
 	public void execute(CommandSender sender, Rank rank, String suffix) {
 		if (rank == null) {
-			sender.sendMessage(Style.RED + "A rank with that name does not exist.");
+			sender.sendMessage(Style.RED + "A packet with that name does not exist.");
 			return;
 		}
 
 		rank.setSuffix(Style.translate(suffix));
 		rank.save();
 
-		sender.sendMessage(Style.GREEN + "You updated the rank's suffix.");
+		sender.sendMessage(Style.GREEN + "You updated the packet's suffix.");
 	}
 
 }

@@ -4,7 +4,7 @@ package net.spicapvp.core.clan.command;
 import com.qrakn.honcho.command.CommandMeta;
 import net.spicapvp.core.SpicaCore;
 import net.spicapvp.core.clan.Clan;
-import net.spicapvp.core.network.packet.clan.PacketClanKick;
+import net.spicapvp.core.clan.packet.PacketClanKick;
 import net.spicapvp.core.profile.Profile;
 import net.spicapvp.core.util.Style;
 import net.spicapvp.core.util.TimeUtil;

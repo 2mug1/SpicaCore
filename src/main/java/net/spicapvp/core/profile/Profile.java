@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.spicapvp.core.SpicaCore;
 import net.spicapvp.core.clan.Clan;
+import net.spicapvp.core.nametag.NameTagHandler;
 import net.spicapvp.core.profile.conversation.ProfileConversations;
 import net.spicapvp.core.friend.Friend;
 import net.spicapvp.core.grant.event.GrantAppliedEvent;
@@ -59,10 +60,12 @@ public class Profile {
 	@Getter Experience experience;
 	@Getter Economy economy;
 	@Getter @Setter Long loginBonusTimestamp;
-	@Getter
-    Friend friend;
+	@Getter Friend friend;
 	@Setter String clanName;
 	@Getter @Setter long lastReported;
+
+	@Getter @Setter String prefix;
+	@Getter @Setter String suffix;
 
 	public Profile(String username, UUID uuid) {
 		this.username = username;
@@ -243,6 +246,8 @@ public class Profile {
 			loginBonusTimestamp = document.getLong("loginBonusTimestamp");
 			clanName = document.getString("clanName");
 			lastReported = document.getLong("lastReported");
+			prefix = document.getString("prefix");
+			suffix = document.getString("suffix");
 
 			//Options
 			Document optionsDocument = (Document) document.get("options");
@@ -319,6 +324,8 @@ public class Profile {
 		document.put("loginBonusTimestamp", loginBonusTimestamp);
 		document.put("clanName", clanName);
 		document.put("lastReported", lastReported);
+		document.put("prefix", prefix);
+		document.put("suffix", suffix);
 
 		Document optionsDocument = new Document();
 		optionsDocument.put("publicChatEnabled", options.publicChatEnabled());
@@ -373,6 +380,17 @@ public class Profile {
 		document.put("punishments", punishmentList.toString());
 
 		SpicaCore.get().getMongo().getProfiles().replaceOne(Filters.eq("uuid", uuid.toString()), document, new ReplaceOptions().upsert(true));
+	}
+
+	public void refreshNameTag() {
+		Player player = getPlayer();
+
+		if (player == null) return;
+
+		for (Player online : Bukkit.getOnlinePlayers()) {
+			NameTagHandler.removeFromTeams(online, player);
+			NameTagHandler.addToTeam(online, player, getPrefix(), getSuffix(), false);
+		}
 	}
 
 	public static Profile getByUuid(UUID uuid) {

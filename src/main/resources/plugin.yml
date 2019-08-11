@@ -1,4 +1,4 @@
-main: SpicaCore
+main: net.spicapvp.core.SpicaCore
 name: SpicaCore
 version: 1.0
-depend: [RequiresAPI]
+depend: [Honcho]

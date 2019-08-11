@@ -32,10 +32,10 @@ public class SpicaMongo {
                     mainConfig.getString("MONGO.AUTHENTICATION.PASSWORD").toCharArray());
 
             database = new MongoClient(serverAddress, credential, MongoClientOptions.builder().build())
-                    .getDatabase("routenetwork");
+                    .getDatabase("spicanetwork");
         } else {
             database = new MongoClient(mainConfig.getString("MONGO.HOST"),
-                    mainConfig.getInteger("MONGO.PORT")).getDatabase("routenetwork");
+                    mainConfig.getInteger("MONGO.PORT")).getDatabase("spicanetwork");
         }
 
         this.profiles = this.database.getCollection("profiles");

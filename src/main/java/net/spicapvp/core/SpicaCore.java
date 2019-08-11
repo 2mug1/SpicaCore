@@ -12,28 +12,27 @@ import net.spicapvp.core.chat.command.SlowChatCommand;
 import net.spicapvp.core.clan.ClanPlayerRole;
 import net.spicapvp.core.clan.ClanPlayerRoleTypeAdapter;
 import net.spicapvp.core.clan.command.*;
+import net.spicapvp.core.clan.packet.*;
+import net.spicapvp.core.convenient.packet.PacketClickableBroadcast;
 import net.spicapvp.core.io.config.ConfigValidation;
 import net.spicapvp.core.convenient.Convenient;
 import net.spicapvp.core.convenient.ConvenientListener;
 import net.spicapvp.core.io.file.type.BasicConfigurationFile;
+import net.spicapvp.core.nametag.command.*;
+import net.spicapvp.core.nametag.packet.*;
 import net.spicapvp.core.network.NetworkPacketListener;
-import net.spicapvp.core.network.packet.clan.*;
-import net.spicapvp.core.network.packet.friend.PacketFriendAccepted;
-import net.spicapvp.core.network.packet.friend.PacketFriendDelete;
-import net.spicapvp.core.network.packet.friend.PacketFriendJoinNetwork;
-import net.spicapvp.core.network.packet.friend.PacketFriendSendRequest;
-import net.spicapvp.core.network.packet.grant.PacketAddGrant;
-import net.spicapvp.core.network.packet.grant.PacketDeleteGrant;
-import net.spicapvp.core.network.packet.network.*;
-import net.spicapvp.core.network.packet.punishment.PacketBroadcastPunishment;
-import net.spicapvp.core.network.packet.rank.PacketDeleteRank;
-import net.spicapvp.core.network.packet.rank.PacketRefreshRank;
-import net.spicapvp.core.network.packet.staff.PacketStaffChat;
+import net.spicapvp.core.friend.packet.PacketFriendAccepted;
+import net.spicapvp.core.friend.packet.PacketFriendDelete;
+import net.spicapvp.core.friend.packet.PacketFriendJoinNetwork;
+import net.spicapvp.core.friend.packet.PacketFriendSendRequest;
+import net.spicapvp.core.grant.packet.PacketAddGrant;
+import net.spicapvp.core.grant.packet.PacketDeleteGrant;
+import net.spicapvp.core.punishment.packet.PacketBroadcastPunishment;
+import net.spicapvp.core.rank.packet.PacketDeleteRank;
+import net.spicapvp.core.rank.packet.PacketRefreshRank;
 import net.spicapvp.core.pidgin.Pidgin;
 import net.spicapvp.core.profile.Profile;
 import net.spicapvp.core.profile.ProfileTypeAdapter;
-import net.spicapvp.core.friend.command.FriendAcceptCommand;
-import net.spicapvp.core.friend.command.FriendCommand;
 import net.spicapvp.core.profile.option.command.OptionsCommand;
 import net.spicapvp.core.profile.conversation.command.MessageCommand;
 import net.spicapvp.core.profile.conversation.command.ReplyCommand;
@@ -65,6 +64,7 @@ import net.spicapvp.core.rank.command.RankSetWeightCommand;
 import net.spicapvp.core.rank.command.RankUninheritCommand;
 import net.spicapvp.core.rank.command.RanksCommand;
 import net.spicapvp.core.socket.SpicaServerStatusAPI;
+import net.spicapvp.core.staff.packet.*;
 import net.spicapvp.core.task.MenuUpdateTask;
 import net.spicapvp.core.util.Style;
 import net.spicapvp.core.util.adapter.ChatColorTypeAdapter;
@@ -185,8 +185,6 @@ public class SpicaCore extends JavaPlugin {
 				new PingCommand(),
 				new ListCommand(),
 				new LogsCommand(),
-				new FriendCommand(),
-				new FriendAcceptCommand(),
 				new ClanCommand(),
 				new ClanChatCommand(),
 				new ClanCreateCommand(),
@@ -198,7 +196,13 @@ public class SpicaCore extends JavaPlugin {
 				new ClanLeaveCommand(),
 				new ClanRoleCommand(),
 				new ClanTagCommand(),
-				new ReportCommand()
+				new ReportCommand(),
+				new AddPrefixCommand(),
+				new AddSuffixCommand(),
+				new SetPrefixCommand(),
+				new SetSuffixCommand(),
+				new ResetPrefixCommand(),
+				new ResetSuffixCommand()
 		).forEach(honcho::registerCommand);
 
 		honcho.registerTypeAdapter(Rank.class, new RankTypeAdapter());
@@ -207,7 +211,7 @@ public class SpicaCore extends JavaPlugin {
 		honcho.registerTypeAdapter(ChatColor.class, new ChatColorTypeAdapter());
 		honcho.registerTypeAdapter(ClanPlayerRole.class, new ClanPlayerRoleTypeAdapter());
 
-		pidgin = new Pidgin("routenetwork",
+		pidgin = new Pidgin("spicanetwork",
 				mainConfig.getString("REDIS.HOST"),
 				mainConfig.getInteger("REDIS.PORT"),
 				mainConfig.getBoolean("REDIS.AUTHENTICATION.ENABLED") ?
@@ -237,7 +241,13 @@ public class SpicaCore extends JavaPlugin {
 				PacketClanJoin.class,
 				PacketClanLeave.class,
 				PacketClanPlayerRoleChange.class,
-				PacketReportPlayer.class
+				PacketReportPlayer.class,
+				PacketAddPrefix.class,
+				PacketAddSuffix.class,
+				PacketResetPrefix.class,
+				PacketResetSuffix.class,
+				PacketSetPrefix.class,
+				PacketSetSuffix.class
 		).forEach(pidgin::registerPacket);
 
 		pidgin.registerListener(new NetworkPacketListener(this));
@@ -324,7 +334,6 @@ public class SpicaCore extends JavaPlugin {
 	}
 
 	private void loadServerStatus(){
-		SpicaServerStatusAPI.init(this, 1);
 		List<String> list = mainConfig.getStringList("SERVER_STATUS.SERVERS");
 
 		if(list == null) return;
@@ -345,5 +354,7 @@ public class SpicaCore extends JavaPlugin {
 				this.getLogger().info(data + " has been added to cache for server status.");
 			});
 		}
+
+		SpicaServerStatusAPI.init(this, 1);
 	}
 }

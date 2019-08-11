@@ -101,7 +101,7 @@ public class GrantsListMenu extends PaginatedMenu {
 			} else {
 				if (!grant.hasExpired()) {
 					lore.add(Style.MENU_BAR);
-					lore.add("&aRight click to remove this grant");
+					lore.add("&aRight click to remove this packet");
 				}
 			}
 
@@ -120,7 +120,7 @@ public class GrantsListMenu extends PaginatedMenu {
 				GrantProcedure procedure = new GrantProcedure(player, profile, GrantProcedureType.REMOVE, GrantProcedureStage.REQUIRE_TEXT);
 				procedure.setGrant(grant);
 
-				player.sendMessage(Style.GREEN + "Type a reason for removing this grant in chat...");
+				player.sendMessage(Style.GREEN + "Type a reason for removing this packet in chat...");
 				player.closeInventory();
 			}
 		}

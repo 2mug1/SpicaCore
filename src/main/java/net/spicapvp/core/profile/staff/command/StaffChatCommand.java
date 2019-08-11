@@ -2,7 +2,7 @@ package net.spicapvp.core.profile.staff.command;
 
 import com.qrakn.honcho.command.CommandMeta;
 import net.spicapvp.core.SpicaCore;
-import net.spicapvp.core.network.packet.staff.PacketStaffChat;
+import net.spicapvp.core.staff.packet.PacketStaffChat;
 import net.spicapvp.core.profile.Profile;
 import net.spicapvp.core.util.Style;
 import org.bukkit.entity.Player;

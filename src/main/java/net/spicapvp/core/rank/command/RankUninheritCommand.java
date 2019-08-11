@@ -5,26 +5,26 @@ import com.qrakn.honcho.command.CommandMeta;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
-@CommandMeta(label = "rank uninherit", permission = "spicaCore.admin.rank", async = true)
+@CommandMeta(label = "packet uninherit", permission = "spicaCore.admin.packet", async = true)
 public class RankUninheritCommand {
 
 	public void execute(CommandSender sender, Rank parent, Rank child) {
 		if (parent == null) {
-			sender.sendMessage(ChatColor.RED + "A rank with that name does not exist (parent).");
+			sender.sendMessage(ChatColor.RED + "A packet with that name does not exist (parent).");
 			return;
 		}
 
 		if (child == null) {
-			sender.sendMessage(ChatColor.RED + "A rank with that name does not exist (child).");
+			sender.sendMessage(ChatColor.RED + "A packet with that name does not exist (child).");
 			return;
 		}
 
 		if (parent.getInherited().remove(child)) {
 			parent.save();
-			sender.sendMessage(ChatColor.GREEN + "You made the parent rank " + parent.getDisplayName() +
-			                   " uninherit the child rank " + child.getDisplayName() + ".");
+			sender.sendMessage(ChatColor.GREEN + "You made the parent packet " + parent.getDisplayName() +
+			                   " uninherit the child packet " + child.getDisplayName() + ".");
 		} else {
-			sender.sendMessage(ChatColor.RED + "That parent rank does not inherit that child rank.");
+			sender.sendMessage(ChatColor.RED + "That parent packet does not inherit that child packet.");
 		}
 	}
 

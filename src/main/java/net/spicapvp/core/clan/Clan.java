@@ -9,8 +9,8 @@ import lombok.Data;
 import net.spicapvp.core.SpicaCore;
 import net.spicapvp.core.clan.json.ClanJsonDeserializer;
 import net.spicapvp.core.clan.json.ClanJsonSerializer;
-import net.spicapvp.core.network.packet.clan.PacketClanBroadcast;
-import net.spicapvp.core.network.packet.clan.PacketClanChat;
+import net.spicapvp.core.clan.packet.PacketClanBroadcast;
+import net.spicapvp.core.clan.packet.PacketClanChat;
 import net.spicapvp.core.util.Style;
 import org.bson.Document;
 

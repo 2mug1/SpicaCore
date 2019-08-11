@@ -9,7 +9,7 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
-@CommandMeta(label = "ranks", permission = "spicaCore.admin.rank")
+@CommandMeta(label = "ranks", permission = "spicaCore.admin.packet")
 public class RanksCommand {
 
 	public void execute(CommandSender sender) {

@@ -121,7 +121,7 @@ public class PunishmentLogsMenu extends PaginatedMenu {
             } else {
                 if (!punishment.hasExpired() && punishment.getType().isRemovable()) {
                     lore.add(Style.MENU_BAR);
-                    lore.add("&aRight click to remove this punishment");
+                    lore.add("&aRight click to remove this packet");
                 }
             }
 
@@ -140,7 +140,7 @@ public class PunishmentLogsMenu extends PaginatedMenu {
                 PunishmentProcedure procedure = new PunishmentProcedure(player, profile, PunishmentProcedureType.PARDON, PunishmentProcedureStage.REQUIRE_TEXT);
                 procedure.setPunishment(punishment);
 
-                player.sendMessage(Style.GREEN + "Enter a reason for removing this punishment.");
+                player.sendMessage(Style.GREEN + "Enter a reason for removing this packet.");
                 player.closeInventory();
             }
         }

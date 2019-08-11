@@ -21,7 +21,7 @@ public class PunishmentListener extends StrappedListener {
 
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
-		if (!event.getPlayer().hasPermission("spicaCore.staff.grant")) {
+		if (!event.getPlayer().hasPermission("spicaCore.staff.packet")) {
 			return;
 		}
 
@@ -32,12 +32,12 @@ public class PunishmentListener extends StrappedListener {
 
 			if (event.getMessage().equalsIgnoreCase("cancel")) {
 				PunishmentProcedure.getProcedures().remove(procedure);
-				event.getPlayer().sendMessage(Style.RED + "You have cancelled the punishment procedure.");
+				event.getPlayer().sendMessage(Style.RED + "You have cancelled the packet procedure.");
 				return;
 			}
 
 			if (procedure.getType() == PunishmentProcedureType.PARDON) {
-				new ConfirmMenu(Style.YELLOW + "Pardon this punishment?", new TypeCallback<Boolean>() {
+				new ConfirmMenu(Style.YELLOW + "Pardon this packet?", new TypeCallback<Boolean>() {
 					@Override
 					public void callback(Boolean data) {
 						if (data) {
@@ -47,10 +47,10 @@ public class PunishmentListener extends StrappedListener {
 							procedure.getPunishment().setRemoved(true);
 							procedure.finish();
 
-							event.getPlayer().sendMessage(Style.GREEN + "The punishment has been removed.");
+							event.getPlayer().sendMessage(Style.GREEN + "The packet has been removed.");
 						} else {
 							procedure.cancel();
-							event.getPlayer().sendMessage(Style.RED + "You did not confirm to pardon the punishment.");
+							event.getPlayer().sendMessage(Style.RED + "You did not confirm to pardon the packet.");
 						}
 					}
 				}, true) {
@@ -58,7 +58,7 @@ public class PunishmentListener extends StrappedListener {
 					public void onClose(Player player) {
 						if (!isClosedByMenu()) {
 							procedure.cancel();
-							event.getPlayer().sendMessage(Style.RED + "You did not confirm to pardon the punishment.");
+							event.getPlayer().sendMessage(Style.RED + "You did not confirm to pardon the packet.");
 						}
 					}
 				}.openMenu(event.getPlayer());

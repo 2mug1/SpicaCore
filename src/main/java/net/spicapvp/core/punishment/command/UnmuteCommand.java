@@ -4,7 +4,7 @@ import com.qrakn.honcho.command.CPL;
 import com.qrakn.honcho.command.CommandMeta;
 import net.spicapvp.core.Locale;
 import net.spicapvp.core.SpicaCore;
-import net.spicapvp.core.network.packet.punishment.PacketBroadcastPunishment;
+import net.spicapvp.core.punishment.packet.PacketBroadcastPunishment;
 import net.spicapvp.core.profile.Profile;
 import net.spicapvp.core.punishment.Punishment;
 import net.spicapvp.core.punishment.PunishmentType;
