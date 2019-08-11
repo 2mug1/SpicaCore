@@ -58,13 +58,13 @@ public class NameTagHandler {
 
         team2 = target.getScoreboard().registerNewTeam(getTeamName(player));
 
-        if (prefix != null && !prefix.isEmpty()){
+        if (profile.getCurrentPrefix() != null && !profile.getCurrentPrefix().isEmpty()){
             team2.setPrefix(ChatColor.translateAlternateColorCodes('&', profile.getCurrentPrefix()));
         }else{
             team2.setPrefix("");
         }
 
-        if (suffix != null && !suffix.isEmpty()){
+        if (profile.getCurrentSuffix() != null && !profile.getCurrentSuffix().isEmpty()){
             team2.setSuffix(ChatColor.translateAlternateColorCodes('&', profile.getCurrentSuffix()));
         }else{
             team2.setSuffix("");

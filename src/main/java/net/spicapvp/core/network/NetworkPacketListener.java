@@ -373,7 +373,7 @@ public class NetworkPacketListener implements PacketListener {
 		if(player != null) {
 			Bukkit.getOnlinePlayers().forEach(online -> profile.refreshNameTag(online, player, null, null));
 
-			player.sendMessage("Prefixが上書きされました");
+			player.sendMessage("Prefixが設定されました");
 		}
 	}
 
@@ -390,7 +390,7 @@ public class NetworkPacketListener implements PacketListener {
 		if(player != null) {
 			Bukkit.getOnlinePlayers().forEach(online -> profile.refreshNameTag(online, player, null, null));
 
-			player.sendMessage("Suffixが上書きされました");
+			player.sendMessage("Suffixが設定されました");
 		}
 	}
 
