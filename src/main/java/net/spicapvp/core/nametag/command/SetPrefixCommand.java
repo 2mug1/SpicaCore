@@ -12,7 +12,7 @@ public class SetPrefixCommand {
 
     public void execute(CommandSender sender, @CPL("player") Profile profile, String prefix) {
         if(prefix.length() > 16){
-            sender.sendMessage("Suffixは16文字以下まで");
+            sender.sendMessage("Prefixは16文字以下まで");
             return;
         }
 
