@@ -30,13 +30,16 @@ import java.util.Map;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
+import net.spicapvp.core.util.Style;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
+import org.bukkit.scoreboard.Team;
 
 public class Profile {
 
@@ -64,8 +67,7 @@ public class Profile {
 	@Setter String clanName;
 	@Getter @Setter long lastReported;
 
-	@Getter @Setter String prefix;
-	@Getter @Setter String suffix;
+	@Getter @Setter String prefix, suffix, currentPrefix, currentSuffix;
 
 	public Profile(String username, UUID uuid) {
 		this.username = username;
@@ -382,15 +384,26 @@ public class Profile {
 		SpicaCore.get().getMongo().getProfiles().replaceOne(Filters.eq("uuid", uuid.toString()), document, new ReplaceOptions().upsert(true));
 	}
 
-	public void refreshNameTag() {
-		Player player = getPlayer();
+	public String getFormattedChatName(String playerName){
+		return (isInClan() ? getClan().getStyleTag() + " " : "") +
+				(getPrefix() == null ? "" : ChatColor.translateAlternateColorCodes('&', getPrefix())) +
+				Style.RESET + playerName + (getSuffix() == null ? "" : ChatColor.translateAlternateColorCodes('&', getSuffix()));
+	}
 
-		if (player == null) return;
-
-		for (Player online : Bukkit.getOnlinePlayers()) {
-			NameTagHandler.removeFromTeams(online, player);
-			NameTagHandler.addToTeam(online, player, getPrefix(), getSuffix(), false);
+	public void refreshNameTag(Player player, Player target, String customPrefix, String customSuffix) {
+		if(customPrefix != null){
+			this.currentPrefix = prefix + customPrefix;
+		}else{
+			this.currentPrefix = prefix;
 		}
+
+		if(customSuffix != null){
+			this.currentSuffix = suffix + customSuffix;
+		}else{
+			this.currentSuffix = suffix;
+		}
+
+		NameTagHandler.setTag(player, target, currentPrefix, currentSuffix, false);
 	}
 
 	public static Profile getByUuid(UUID uuid) {

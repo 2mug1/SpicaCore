@@ -11,7 +11,12 @@ import org.bukkit.command.CommandSender;
 public class SetSuffixCommand {
 
     public void execute(CommandSender sender, @CPL("player") Profile profile, String suffix) {
-        sender.sendMessage(profile.getUsername() + " のSuffixを上書きしました: " + suffix);
+        if(suffix.length() > 16){
+            sender.sendMessage("Suffixは16文字以下まで");
+            return;
+        }
+
+        sender.sendMessage(profile.getUsername() + " のSuffixを設定しました: " + suffix);
 
         SpicaCore.get().getPidgin().sendPacket(new PacketSetSuffix(profile.getUuid(), suffix));
     }

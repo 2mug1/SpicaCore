@@ -18,8 +18,8 @@ public class SpicaServerStatus {
     private boolean serverUp;
     private String motd;
     private String version;
-    private String currentPlayers;
-    private String maximumPlayers;
+    private int currentPlayers;
+    private int maximumPlayers;
     private long latency;
 
     public SpicaServerStatus(String address, int port) {
@@ -62,8 +62,8 @@ public class SpicaServerStatus {
                 serverUp = true;
                 setVersion(serverData[2].replace("\u0000", ""));
                 setMotd(serverData[3].replace("\u0000", ""));
-                setCurrentPlayers(serverData[4].replace("\u0000", ""));
-                setMaximumPlayers(serverData[5].replace("\u0000", ""));
+                setCurrentPlayers(Integer.parseInt(serverData[4].replace("\u0000", "")));
+                setMaximumPlayers(Integer.parseInt(serverData[5].replace("\u0000", "")));
             } else
                 serverUp = false;
         }

@@ -4,6 +4,7 @@ import net.spicapvp.core.Locale;
 import net.spicapvp.core.SpicaCore;
 import net.spicapvp.core.board.Board;
 import net.spicapvp.core.nametag.NameTagHandler;
+import net.spicapvp.core.socket.SpicaServerStatus;
 import net.spicapvp.core.strap.StrappedListener;
 import net.spicapvp.core.cache.RedisPlayerData;
 import net.spicapvp.core.staff.packet.PacketStaffChat;
@@ -134,7 +135,12 @@ public class ProfileListener extends StrappedListener {
 			);
 		}
 
-		profile.refreshNameTag();
+		SpicaCore.get().getServer().getScheduler().runTaskLater(SpicaCore.get(), new Runnable() {
+			@Override
+			public void run() {
+				Bukkit.getOnlinePlayers().forEach(online -> profile.refreshNameTag(online, player, null, null));
+			}
+		}, 20L);
 	}
 
 	@EventHandler

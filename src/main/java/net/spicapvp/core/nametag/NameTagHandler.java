@@ -1,84 +1,78 @@
 package net.spicapvp.core.nametag;
 
+import java.util.Iterator;
+import java.util.UUID;
+
+import net.spicapvp.core.profile.Profile;
 import net.spicapvp.core.util.Style;
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
-
-import java.util.Iterator;
 
 public class NameTagHandler {
 
-    private static final String PREFIX = "nt_team_";
-    private static final ChatColor[] COLORS = new ChatColor[]{
-            ChatColor.RED,
-            ChatColor.GREEN,
-            ChatColor.BLUE,
-            ChatColor.AQUA,
-            ChatColor.LIGHT_PURPLE,
-            ChatColor.DARK_PURPLE,
-            ChatColor.GOLD,
-            ChatColor.YELLOW,
-    };
-
-    private static String getTeamName(Player target) {
-        return target.getName();
+    private static String getTeamName(Player player) {
+        return player.getName();
     }
 
-    public static void setup(Player player) {
-        Scoreboard scoreboard = player.getScoreboard();
-
-        if (scoreboard.equals(Bukkit.getServer().getScoreboardManager().getMainScoreboard())) {
-            scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
-        }
-
-        for (ChatColor color : COLORS) {
-            String teamName = getTeamName(player);
-            Team team = scoreboard.getTeam(teamName);
-
-            if (team == null) {
-                team = scoreboard.registerNewTeam(teamName);
-            }
-
-            team.setPrefix(color.toString());
-
-            Iterator<String> entryIterator = team.getEntries().iterator();
-
-            while (entryIterator.hasNext()) {
-                entryIterator.remove();
-            }
-        }
-
-        player.setScoreboard(scoreboard);
-    }
-
-    public static void addToTeam(Player player, Player target, String prefix, String suffix, boolean showHealth) {
-
+    public static void setTag(Player player, Player target, String prefix, String suffix, boolean showHealth) {
         Team team = player.getScoreboard().getTeam(getTeamName(target));
 
-        if (team == null) {
-            team = player.getScoreboard().registerNewTeam(getTeamName(target));
+        if(team != null){
+            team.unregister();
         }
 
-        if (prefix != null) {
+        team = player.getScoreboard().registerNewTeam(getTeamName(target));
+
+        if (prefix != null && !prefix.isEmpty()){
             team.setPrefix(ChatColor.translateAlternateColorCodes('&', prefix));
+        }else{
+           team.setPrefix("");
         }
 
-        if (suffix != null) {
+        if (suffix != null && !suffix.isEmpty()){
             team.setSuffix(ChatColor.translateAlternateColorCodes('&', suffix));
+        }else{
+            team.setSuffix("");
         }
 
-        if (team.hasEntry(target.getName())) {
-            return;
+        if(!team.hasEntry(target.getName())){
+            team.addEntry(target.getName());
         }
 
-        team.addEntry(target.getName());
+        if(player.equals(target))return;
 
+        Profile profile = Profile.getByUuid(player.getUniqueId());
+
+        if(profile == null)return;
+
+        Team team2 = target.getScoreboard().getTeam(getTeamName(player));
+
+        if(team2 != null){
+            team2.unregister();
+        }
+
+        team2 = target.getScoreboard().registerNewTeam(getTeamName(player));
+
+        if (prefix != null && !prefix.isEmpty()){
+            team2.setPrefix(ChatColor.translateAlternateColorCodes('&', profile.getCurrentPrefix()));
+        }else{
+            team2.setPrefix("");
+        }
+
+        if (suffix != null && !suffix.isEmpty()){
+            team2.setSuffix(ChatColor.translateAlternateColorCodes('&', profile.getCurrentSuffix()));
+        }else{
+            team2.setSuffix("");
+        }
+
+        if(!team2.hasEntry(player.getName())){
+            team2.addEntry(player.getName());
+        }
 
         if (showHealth) {
             Objective objective = player.getScoreboard().getObjective(DisplaySlot.BELOW_NAME);
@@ -94,6 +88,10 @@ public class NameTagHandler {
     }
 
     public static void removeFromTeams(Player player, Player target) {
+        if (player == null || target == null) {
+            return;
+        }
+
         for (Team team : player.getScoreboard().getTeams()) {
             team.removeEntry(target.getName());
         }
@@ -110,4 +108,5 @@ public class NameTagHandler {
             objective.unregister();
         }
     }
+
 }

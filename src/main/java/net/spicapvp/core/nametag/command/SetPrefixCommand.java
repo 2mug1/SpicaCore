@@ -11,7 +11,12 @@ import org.bukkit.command.CommandSender;
 public class SetPrefixCommand {
 
     public void execute(CommandSender sender, @CPL("player") Profile profile, String prefix) {
-        sender.sendMessage(profile.getUsername() + " のPrefixを上書きしました: " + prefix);
+        if(prefix.length() > 16){
+            sender.sendMessage("Suffixは16文字以下まで");
+            return;
+        }
+
+        sender.sendMessage(profile.getUsername() + " のPrefixを設定しました: " + prefix);
 
         SpicaCore.get().getPidgin().sendPacket(new PacketSetPrefix(profile.getUuid(), prefix));
     }

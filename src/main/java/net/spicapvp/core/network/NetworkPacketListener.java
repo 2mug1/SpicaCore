@@ -333,12 +333,11 @@ public class NetworkPacketListener implements PacketListener {
 		profile.setPrefix(profile.getPrefix() + packet.getPrefix());
 		profile.save();
 
-		profile.refreshNameTag();
 
 		Player player = Bukkit.getPlayer(uuid);
 
 		if(player != null) {
-			profile.refreshNameTag();
+			Bukkit.getOnlinePlayers().forEach(online -> profile.refreshNameTag(online, player, null, null));
 
 			player.sendMessage("Prefixが追加されました");
 		}
@@ -355,7 +354,7 @@ public class NetworkPacketListener implements PacketListener {
 		Player player = Bukkit.getPlayer(uuid);
 
 		if(player != null) {
-			profile.refreshNameTag();
+			Bukkit.getOnlinePlayers().forEach(online -> profile.refreshNameTag(online, player, null, null));
 
 			player.sendMessage("Suffixが追加されました");
 		}
@@ -372,7 +371,7 @@ public class NetworkPacketListener implements PacketListener {
 		Player player = Bukkit.getPlayer(uuid);
 
 		if(player != null) {
-			profile.refreshNameTag();
+			Bukkit.getOnlinePlayers().forEach(online -> profile.refreshNameTag(online, player, null, null));
 
 			player.sendMessage("Prefixが上書きされました");
 		}
@@ -389,7 +388,7 @@ public class NetworkPacketListener implements PacketListener {
 		Player player = Bukkit.getPlayer(uuid);
 
 		if(player != null) {
-			profile.refreshNameTag();
+			Bukkit.getOnlinePlayers().forEach(online -> profile.refreshNameTag(online, player, null, null));
 
 			player.sendMessage("Suffixが上書きされました");
 		}
@@ -406,7 +405,7 @@ public class NetworkPacketListener implements PacketListener {
 		Player player = Bukkit.getPlayer(uuid);
 
 		if(player != null) {
-			profile.refreshNameTag();
+			Bukkit.getOnlinePlayers().forEach(online -> profile.refreshNameTag(online, player, null, null));
 
 			player.sendMessage("Prefixがリセットされました");
 		}
@@ -423,7 +422,7 @@ public class NetworkPacketListener implements PacketListener {
 		Player player = Bukkit.getPlayer(uuid);
 
 		if(player != null) {
-			profile.refreshNameTag();
+			Bukkit.getOnlinePlayers().forEach(online -> profile.refreshNameTag(online, player, null, null));
 
 			player.sendMessage("Suffixがリセットされました");
 		}
