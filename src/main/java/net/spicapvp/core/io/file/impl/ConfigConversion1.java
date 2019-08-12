@@ -1,6 +1,6 @@
-package net.spicapvp.core.io.config.impl;
+package net.spicapvp.core.io.file.impl;
 
-import net.spicapvp.core.io.config.ConfigConversion;
+import net.spicapvp.core.io.file.ConfigConversion;
 import java.io.File;
 import java.io.IOException;
 

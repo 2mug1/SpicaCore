@@ -1,4 +1,4 @@
-package net.spicapvp.core.io.config;
+package net.spicapvp.core.io.file;
 
 import java.io.File;
 import org.bukkit.configuration.file.FileConfiguration;

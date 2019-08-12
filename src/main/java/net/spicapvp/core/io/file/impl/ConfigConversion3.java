@@ -1,6 +1,6 @@
-package net.spicapvp.core.io.config.impl;
+package net.spicapvp.core.io.file.impl;
 
-import net.spicapvp.core.io.config.ConfigConversion;
+import net.spicapvp.core.io.file.ConfigConversion;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;

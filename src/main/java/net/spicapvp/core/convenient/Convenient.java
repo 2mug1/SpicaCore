@@ -1,5 +1,6 @@
 package net.spicapvp.core.convenient;
 
+import lombok.Getter;
 import net.spicapvp.core.SpicaCore;
 import net.spicapvp.core.strap.Strapped;
 import net.spicapvp.core.convenient.event.SpawnTeleportEvent;
@@ -38,10 +39,12 @@ public class Convenient extends Strapped {
 		}
 	}
 
-	public void teleportToSpawn(Player player) {
-		Location location = spawn == null ? spicaCore.getServer().getWorlds().get(0).getSpawnLocation() : spawn;
+	public Location getSpawn(){
+		return spawn == null ? spicaCore.getServer().getWorlds().get(0).getSpawnLocation() : spawn;
+	}
 
-		SpawnTeleportEvent event = new SpawnTeleportEvent(player, location);
+	public void teleportToSpawn(Player player) {
+		SpawnTeleportEvent event = new SpawnTeleportEvent(player, getSpawn());
 		event.call();
 
 		if (!event.isCancelled() && event.getLocation() != null) {

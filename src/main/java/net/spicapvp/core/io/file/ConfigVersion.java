@@ -1,10 +1,10 @@
-package net.spicapvp.core.io.config;
+package net.spicapvp.core.io.file;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import net.spicapvp.core.io.config.impl.ConfigConversion1;
-import net.spicapvp.core.io.config.impl.ConfigConversion2;
-import net.spicapvp.core.io.config.impl.ConfigConversion3;
+import net.spicapvp.core.io.file.impl.ConfigConversion1;
+import net.spicapvp.core.io.file.impl.ConfigConversion2;
+import net.spicapvp.core.io.file.impl.ConfigConversion3;
 
 @AllArgsConstructor
 @Getter

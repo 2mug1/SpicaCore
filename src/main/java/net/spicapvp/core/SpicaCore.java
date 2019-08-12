@@ -14,7 +14,7 @@ import net.spicapvp.core.clan.ClanPlayerRoleTypeAdapter;
 import net.spicapvp.core.clan.command.*;
 import net.spicapvp.core.clan.packet.*;
 import net.spicapvp.core.convenient.packet.PacketClickableBroadcast;
-import net.spicapvp.core.io.config.ConfigValidation;
+import net.spicapvp.core.io.file.ConfigValidation;
 import net.spicapvp.core.convenient.Convenient;
 import net.spicapvp.core.convenient.ConvenientListener;
 import net.spicapvp.core.io.file.type.BasicConfigurationFile;
