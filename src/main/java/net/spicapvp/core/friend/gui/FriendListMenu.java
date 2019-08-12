@@ -2,7 +2,7 @@ package net.spicapvp.core.friend.gui;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import me.signatured.ezqueuespigot.EzQueueAPI;
+import net.spicapvp.core.util.BungeeUtil;
 import net.spicapvp.core.util.Style;
 import net.spicapvp.core.SpicaCore;
 import net.spicapvp.core.cache.RedisPlayerData;
@@ -247,7 +247,7 @@ public class FriendListMenu extends PaginatedMenu {
                         player.sendMessage(profile.getColoredUsername() + Style.GRAY + " is offline.");
                     } else if(redisPlayerData.getLastAction() == RedisPlayerData.LastAction.JOINING_SERVER){
                         player.closeInventory();
-                        EzQueueAPI.addToQueue(player, redisPlayerData.getLastSeenServer());
+                        BungeeUtil.connect(player, redisPlayerData.getLastSeenServer());
                     }
                 }
             });

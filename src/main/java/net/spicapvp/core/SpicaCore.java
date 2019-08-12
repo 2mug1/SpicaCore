@@ -274,8 +274,9 @@ public class SpicaCore extends JavaPlugin {
 			}
 		}.runTaskTimerAsynchronously(this, 20L, 20L);
 
-
 		this.getServer().getScheduler().runTaskTimer(this, new MenuUpdateTask(), 20L, 20L);
+
+		Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 	}
 
 	public void setBoardManager(BoardManager manager) {
