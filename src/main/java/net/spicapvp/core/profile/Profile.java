@@ -406,6 +406,12 @@ public class Profile {
 		NameTagHandler.setTag(player, target, currentPrefix, currentSuffix, false);
 	}
 
+	public String getCustomName(){
+		return Style.RESET + (currentPrefix == null ? "" : ChatColor.translateAlternateColorCodes('&', currentPrefix))
+				+ username +
+				(currentSuffix == null ? "" : ChatColor.translateAlternateColorCodes('&', currentSuffix));
+	}
+
 	public static Profile getByUuid(UUID uuid) {
 		if (profiles.containsKey(uuid)) {
 			return profiles.get(uuid);
