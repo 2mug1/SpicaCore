@@ -1,5 +1,6 @@
 package net.spicapvp.core.io.config;
 
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -30,6 +31,11 @@ public class FileConfig {
         }
 
         this.config = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(this.file);
+    }
+
+    public FileConfig(File file) {
+        this.file = file;
+        this.config = YamlConfiguration.loadConfiguration(this.file);
     }
 
     public void save() {

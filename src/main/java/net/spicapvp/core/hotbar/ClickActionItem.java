@@ -25,5 +25,5 @@ public abstract class ClickActionItem {
         return false;
     }
 
-    public abstract void clickAction (Player player);
+    public abstract void onClick(Player player);
 }

@@ -101,7 +101,7 @@ public class GrantsListMenu extends PaginatedMenu {
 			} else {
 				if (!grant.hasExpired()) {
 					lore.add(Style.MENU_BAR);
-					lore.add("&aRight click to remove this packet");
+					lore.add("&aRight click to remove this grant");
 				}
 			}
 

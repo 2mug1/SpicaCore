@@ -4,7 +4,7 @@ import net.spicapvp.core.util.Style;
 import com.qrakn.honcho.command.CommandMeta;
 import org.bukkit.command.CommandSender;
 
-@CommandMeta(label = { "packet", "packet help" }, permission = "spicaCore.admin.packet")
+@CommandMeta(label = { "rank", "rank help" }, permission = "spicaCore.admin.rank")
 public class RankHelpCommand {
 
 	private static final String[][] HELP;
@@ -12,16 +12,16 @@ public class RankHelpCommand {
 	static {
 		HELP = new String[][]{
 				new String[]{ "ranks", "List all existing ranks" },
-				new String[]{ "packet create <name>", "Create a new packet" },
-				new String[]{ "packet delete <packet>", "Delete an existing packet" },
-				new String[]{ "packet setcolor <packet> <color>", "Set a packet's color" },
-				new String[]{ "packet setprefix <packet> <prefix>", "Set a packet's prefix" },
-				new String[]{ "packet setsuffix <packet> <suffix>", "Set a packet's suffix" },
-				new String[]{ "packet setweight <packet> <weight>", "Set a packet's weight" },
-				new String[]{ "packet addperm <packet> <permission>", "Add a permission to a packet" },
-				new String[]{ "packet delperm <packet> <permission>", "Remove a permission from a packet" },
-				new String[]{ "packet inherit <parent> <child>", "Make a parent packet inherit a child packet" },
-				new String[]{ "packet uninherit <parent> <child>", "Make a parent packet uninherit a child packet" }
+				new String[]{ "rank create <name>", "Create a new rank" },
+				new String[]{ "rank delete <rank>", "Delete an existing rank" },
+				new String[]{ "rank setcolor <rank> <color>", "Set a ranks's color" },
+				new String[]{ "rank setprefix <rank> <prefix>", "Set a ranks's prefix" },
+				new String[]{ "rank setsuffix <rank> <suffix>", "Set a ranks's suffix" },
+				new String[]{ "rank setweight <rank> <weight>", "Set a ranks's weight" },
+				new String[]{ "rank addperm <rank> <permission>", "Add a permission to a rank" },
+				new String[]{ "rank delperm <rank> <permission>", "Remove a permission from a rank" },
+				new String[]{ "rank inherit <parent> <child>", "Make a parent rank inherit a child rank" },
+				new String[]{ "rank uninherit <parent> <child>", "Make a parent rank uninherit a child rank" }
 		};
 	}
 

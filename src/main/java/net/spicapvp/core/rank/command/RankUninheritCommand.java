@@ -5,7 +5,7 @@ import com.qrakn.honcho.command.CommandMeta;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
-@CommandMeta(label = "packet uninherit", permission = "spicaCore.admin.packet", async = true)
+@CommandMeta(label = "rank uninherit", permission = "spicaCore.admin.rank", async = true)
 public class RankUninheritCommand {
 
 	public void execute(CommandSender sender, Rank parent, Rank child) {

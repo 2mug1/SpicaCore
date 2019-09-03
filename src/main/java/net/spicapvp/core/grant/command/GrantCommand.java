@@ -18,7 +18,7 @@ import net.spicapvp.core.grant.Grant;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandMeta(label = "packet", async = true, permission = "spicaCore.staff.packet")
+@CommandMeta(label = "grant", async = true, permission = "spicaCore.staff.grant")
 public class GrantCommand {
 
 	public void execute(CommandSender sender, @CPL("player") Profile profile, Rank rank, Duration duration, String reason) {

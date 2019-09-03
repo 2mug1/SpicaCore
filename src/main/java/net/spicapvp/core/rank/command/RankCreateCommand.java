@@ -5,7 +5,7 @@ import net.spicapvp.core.util.Style;
 import com.qrakn.honcho.command.CommandMeta;
 import org.bukkit.command.CommandSender;
 
-@CommandMeta(label = "packet create", permission = "spicaCore.admin.packet", async = true)
+@CommandMeta(label = "rank create", permission = "spicaCore.admin.rank", async = true)
 public class RankCreateCommand {
 
 	public void execute(CommandSender sender, String name) {
@@ -17,7 +17,7 @@ public class RankCreateCommand {
 		Rank rank = new Rank(name);
 		rank.save();
 
-		sender.sendMessage(Style.GREEN + "You created a new packet.");
+		sender.sendMessage(Style.GREEN + "You created a new rank.");
 	}
 
 }

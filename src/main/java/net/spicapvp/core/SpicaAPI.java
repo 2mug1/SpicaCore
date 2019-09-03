@@ -11,6 +11,10 @@ import java.util.UUID;
 
 public class SpicaAPI {
 
+	public static String getServerName(){
+		return SpicaCore.get().getServerName();
+	}
+
 	public static ChatColor getColorOfPlayer(Player player) {
 		Profile profile = Profile.getProfiles().get(player.getUniqueId());
 		return profile == null ? ChatColor.WHITE : ChatColor.getByChar(profile.getActiveRank().getColor());

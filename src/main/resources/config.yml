@@ -20,14 +20,14 @@ PUNISHMENTS:
   BROADCAST_SILENT: '&7[Silent] &r{target} &ahas been {context} by &r{sender} for &r{reason}'
   BAN:
     KICK: "&cYour account is {context} from Zonix.{temporary}\n\n&cIf you feel this packet is unjust, you may appeal at:\n&ehttps://www.zonix.com"
-    TEMPORARY: "\n&cThis packet expires in &e{time-remaining}&c."
+    TEMPORARY: "\n&cThis rank expires in &e{time-remaining}&c."
   KICK:
     KICK: "&cYou were kicked by a staff member.\nReason: &e{reason}"
 COMMON_ERRORS:
   FAILED_TO_LOAD_PROFILE: "&cFailed to load your profile. Try again later."
   COULD_NOT_RESOLVE_PLAYER: "&cCould not resolve player information..."
   PLAYER_NOT_FOUND: "&cA player with that name could not be found."
-  RANK_NOT_FOUND: "&cA packet with that name could not be found."
+  RANK_NOT_FOUND: "&cA rank with that name could not be found."
 STAFF:
   CHAT: "{0}&r{1}&b ({2}): {3}"
   BROADCAST_PREFIX: "&9&l[Staff] &r"
@@ -36,8 +36,8 @@ STAFF:
   SWITCH_SERVER: "{0}({1} &ajoined {2} &2(from {3})"
 NETWORK:
   BROADCAST_PREFIX: "&8[&eNetwork&8] &f"
-  RANK_REFRESH: "{0}Refreshed packet \"{1}\""
-  RANK_DELETE: "{0}Deleted packet \"{1}\""
+  RANK_REFRESH: "{0}Refreshed rank \"{1}\""
+  RANK_DELETE: "{0}Deleted rank \"{1}\""
 CHAT:
   FORMAT: "%1$s&r: %2$s"
   CLEAR_CHAT_BROADCAST: "&eThe chat has been cleared by &r{0}"

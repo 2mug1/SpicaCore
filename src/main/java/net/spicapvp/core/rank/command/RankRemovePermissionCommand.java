@@ -5,8 +5,8 @@ import net.spicapvp.core.util.Style;
 import com.qrakn.honcho.command.CommandMeta;
 import org.bukkit.command.CommandSender;
 
-@CommandMeta(label = { "packet removepermission", "packet removeperm", "packet deleteperm", "packet delperm" },
-             permission = "spicaCore.admin.packet",
+@CommandMeta(label = { "rank removepermission", "rank removeperm", "rank deleteperm", "rank delperm" },
+             permission = "spicaCore.admin.rank",
              async = true)
 public class RankRemovePermissionCommand {
 

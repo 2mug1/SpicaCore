@@ -10,7 +10,7 @@ public class GrantJsonDeserializer implements JsonDeserializer<Grant> {
 
 	@Override
 	public Grant deserialize(JsonObject object) {
-		Rank rank = Rank.getRankByUuid(UUID.fromString(object.get("packet").getAsString()));
+		Rank rank = Rank.getRankByUuid(UUID.fromString(object.get("grant").getAsString()));
 
 		if (rank == null) {
 			return null;

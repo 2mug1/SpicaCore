@@ -5,7 +5,7 @@ import net.spicapvp.core.util.Style;
 import com.qrakn.honcho.command.CommandMeta;
 import org.bukkit.command.CommandSender;
 
-@CommandMeta(label = "packet setweight", permission = "spicaCore.admin.packet", async = true)
+@CommandMeta(label = "rank setweight", permission = "spicaCore.admin.rank", async = true)
 public class RankSetWeightCommand {
 
 	public void execute(CommandSender sender, Rank rank, String weight) {

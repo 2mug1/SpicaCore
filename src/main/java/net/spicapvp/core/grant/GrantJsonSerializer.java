@@ -9,7 +9,7 @@ public class GrantJsonSerializer implements JsonSerializer<Grant> {
 	public JsonObject serialize(Grant grant) {
 		JsonObject object = new JsonObject();
 		object.addProperty("uuid", grant.getUuid().toString());
-		object.addProperty("packet", grant.getRank().getUuid().toString());
+		object.addProperty("grant", grant.getRank().getUuid().toString());
 		object.addProperty("addedBy", grant.getAddedBy() == null ? null : grant.getAddedBy().toString());
 		object.addProperty("addedAt", grant.getAddedAt());
 		object.addProperty("addedReason", grant.getAddedReason());

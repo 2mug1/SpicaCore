@@ -143,4 +143,24 @@ public final class TimeUtil {
 		return !found ? -1 : totalTime * 1000;
 	}
 
+	public static String timeFormat(int sc) {
+		float fun = (float)(sc / 60);
+		float byou = (float)(sc % 60);
+		int funn = (int)Math.floor((double)fun);
+		int byouu = (int)byou;
+		String funnn = String.valueOf(funn);
+		String byouuu = String.valueOf(byouu);
+		int funkazu = funnn.length();
+		int byoukazu = byouuu.length();
+		if (funkazu == 1) {
+			funnn = "0" + funnn;
+		}
+
+		if (byoukazu == 1) {
+			byouuu = "0" + byouuu;
+		}
+
+		String time = funnn + ":" + byouuu;
+		return time;
+	}
 }

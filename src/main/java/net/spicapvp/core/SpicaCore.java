@@ -14,6 +14,7 @@ import net.spicapvp.core.clan.ClanPlayerRoleTypeAdapter;
 import net.spicapvp.core.clan.command.*;
 import net.spicapvp.core.clan.packet.*;
 import net.spicapvp.core.convenient.packet.PacketClickableBroadcast;
+import net.spicapvp.core.fix.EnderpearlFixListener;
 import net.spicapvp.core.io.file.ConfigValidation;
 import net.spicapvp.core.convenient.Convenient;
 import net.spicapvp.core.convenient.ConvenientListener;
@@ -81,8 +82,10 @@ import java.util.logging.Level;
 import lombok.Getter;
 import lombok.Setter;
 import net.spicapvp.core.convenient.command.*;
+import net.spicapvp.core.world.WorldListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -98,6 +101,8 @@ public class SpicaCore extends JavaPlugin {
 	private static SpicaCore spicaCore;
 
 	private BasicConfigurationFile mainConfig;
+
+	private String serverName;
 
 	private Pidgin pidgin;
 
@@ -121,6 +126,8 @@ public class SpicaCore extends JavaPlugin {
 		honcho = new Honcho(this);
 
 		mainConfig = new BasicConfigurationFile(this, "config");
+
+		serverName = mainConfig.getString("SERVER_NAME");
 
 		new ConfigValidation(mainConfig.getFile(), mainConfig.getConfiguration(), 3).check();
 
@@ -260,7 +267,9 @@ public class SpicaCore extends JavaPlugin {
 				new ConvenientListener(this),
 				new ChatListener(this),
 				new GrantListener(this),
-				new PunishmentListener(this)
+				new PunishmentListener(this),
+				new WorldListener(),
+				new EnderpearlFixListener()
 		).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
 
 		Rank.init();
@@ -316,6 +325,14 @@ public class SpicaCore extends JavaPlugin {
 		Bukkit.getOnlinePlayers().stream().filter(Player::isOp).forEach(op -> op.sendMessage(message));
 	}
 
+	public static void broadcast(String message) {
+		Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage(message));
+	}
+
+	public static void playsound(Sound sound, float volume, float pitch) {
+		Bukkit.getOnlinePlayers().forEach(player -> player.playSound(player.getLocation(), sound, volume, pitch));
+	}
+
 	private void loadMongo() {
 		mongo = new SpicaMongo(mainConfig);
 	}
@@ -355,7 +372,5 @@ public class SpicaCore extends JavaPlugin {
 				this.getLogger().info(data + " has been added to cache for server status.");
 			});
 		}
-
-		SpicaServerStatusAPI.init(this, 1);
 	}
 }

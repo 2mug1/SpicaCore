@@ -7,7 +7,7 @@ import net.spicapvp.core.profile.Profile;
 import net.spicapvp.core.grant.menu.GrantsListMenu;
 import org.bukkit.entity.Player;
 
-@CommandMeta(label = "grants", async = true, permission = "spicaCore.staff.packet")
+@CommandMeta(label = "grants", async = true, permission = "spicaCore.staff.grants")
 public class GrantsCommand {
 
 	public void execute(Player player, @CPL("player") Profile profile) {

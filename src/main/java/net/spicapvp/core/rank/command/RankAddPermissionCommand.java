@@ -5,7 +5,7 @@ import net.spicapvp.core.util.Style;
 import com.qrakn.honcho.command.CommandMeta;
 import org.bukkit.command.CommandSender;
 
-@CommandMeta(label = { "packet addpermission", "packet addperm" }, permission = "spicaCore.admin.packet", async = true)
+@CommandMeta(label = { "rank addpermission", "rank addperm" }, permission = "spicaCore.admin.rank", async = true)
 public class RankAddPermissionCommand {
 
 	public void execute(CommandSender sender, Rank rank, String permission) {
@@ -13,7 +13,7 @@ public class RankAddPermissionCommand {
 			sender.sendMessage(Style.RED + "That packet already has that permission.");
 		} else {
 			rank.save();
-			sender.sendMessage(Style.GREEN + "Successfully added permission to packet.");
+			sender.sendMessage(Style.GREEN + "Successfully added permission to rank.");
 		}
 	}
 

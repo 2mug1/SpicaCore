@@ -251,6 +251,17 @@ public class Profile {
 			prefix = document.getString("prefix");
 			suffix = document.getString("suffix");
 
+			if(prefix == null){
+				this.prefix = "";
+			}
+
+			if(suffix == null){
+				this.suffix = "";
+			}
+
+			this.currentPrefix = "";
+			this.currentSuffix = "";
+
 			//Options
 			Document optionsDocument = (Document) document.get("options");
 			options.publicChatEnabled(optionsDocument.getBoolean("publicChatEnabled"));
@@ -312,6 +323,17 @@ public class Profile {
 	}
 
 	public void save() {
+		if(prefix == null){
+			this.prefix = "";
+		}
+
+		if(suffix == null){
+			this.suffix = "";
+		}
+
+		this.currentPrefix = "";
+		this.currentSuffix = "";
+
 		Document document = new Document();
 		document.put("username", username);
 		document.put("uuid", uuid.toString());
@@ -390,7 +412,7 @@ public class Profile {
 				Style.RESET + playerName + (getSuffix() == null ? "" : ChatColor.translateAlternateColorCodes('&', getSuffix()));
 	}
 
-	public void refreshNameTag(Player player, Player target, String customPrefix, String customSuffix) {
+	public void refreshNameTag(Player player, Player target, String customPrefix, String customSuffix, boolean showHealth) {
 		if(customPrefix != null){
 			this.currentPrefix = prefix + customPrefix;
 		}else{
@@ -403,7 +425,11 @@ public class Profile {
 			this.currentSuffix = suffix;
 		}
 
-		NameTagHandler.setTag(player, target, currentPrefix, currentSuffix, false);
+		NameTagHandler.setTag(player, target, currentPrefix, currentSuffix, showHealth);
+	}
+
+	public void refreshNameTag(Player player, Player target, boolean showHealth) {
+		NameTagHandler.setTag(player, target, currentPrefix, currentSuffix, showHealth);
 	}
 
 	public String getCustomName(){

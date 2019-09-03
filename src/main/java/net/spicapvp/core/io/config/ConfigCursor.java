@@ -1,6 +1,9 @@
 package net.spicapvp.core.io.config;
 
 
+import org.bukkit.inventory.ItemStack;
+
+import java.util.List;
 
 public class ConfigCursor {
     private final FileConfig fileConfig;
@@ -34,6 +37,14 @@ public class ConfigCursor {
 
     public String getString(String path) {
         return this.fileConfig.getConfig().getString((this.path == null ? "" : new StringBuilder().append(this.path).append(".").toString()) + path);
+    }
+
+    public void setItemStackList(String key, List<ItemStack> itemStackList) {
+        this.fileConfig.getConfig().set(this.path + "." + key, itemStackList);
+    }
+
+    public List<ItemStack> getItemStackList(String key) {
+        return (List<ItemStack>) this.fileConfig.getConfig().getList(path + "." + key);
     }
 
     public boolean getBoolean(String path) {
