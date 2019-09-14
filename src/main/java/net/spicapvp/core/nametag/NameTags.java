@@ -1,5 +1,6 @@
 package net.spicapvp.core.nametag;
 
+import net.spicapvp.core.SpicaAPI;
 import net.spicapvp.core.util.Style;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.bukkit.Bukkit;
@@ -11,7 +12,30 @@ import org.bukkit.scoreboard.Team;
 
 public class NameTags {
 
+	public static void handle(Player viewer, boolean showHealth) {
+		for (Player target : Bukkit.getOnlinePlayers()) {
+			handle(viewer, target, showHealth);
+		}
+	}
+
+	public static void handle(Player viewer, Player target, boolean showHealth) {
+		if (viewer == null || target == null) {
+			return;
+		}
+
+		if (viewer.equals(target)) {
+			NameTags.color(viewer, target, SpicaAPI.getColorOfPlayer(viewer).toString(), null, showHealth);
+			return;
+		}
+
+		NameTags.color(viewer, target, SpicaAPI.getColorOfPlayer(target).toString(), null, showHealth);
+	}
+
 	public static void color(Player viewer, Player target, String prefix, String suffix, boolean showHealth) {
+		if(viewer == null || target == null){
+			return;
+		}
+
 		Scoreboard scoreboard = viewer.getScoreboard();
 
 		if (scoreboard.equals(Bukkit.getServer().getScoreboardManager().getMainScoreboard())) {
