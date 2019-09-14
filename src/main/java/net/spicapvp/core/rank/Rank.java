@@ -26,7 +26,7 @@ public class Rank {
 	@Getter private final String displayName;
 	@Getter @Setter private String prefix = "";
 	@Getter @Setter private String suffix = "";
-	@Getter @Setter private String color = "";
+	@Getter @Setter private ChatColor color = ChatColor.WHITE;
 	@Getter @Setter private int weight;
 	@Setter private boolean defaultRank;
 	@Getter private final List<String> permissions = new ArrayList<>();
@@ -52,7 +52,6 @@ public class Rank {
 		this.displayName = displayName;
 		this.prefix = prefix;
 		this.suffix = suffix;
-		this.color = color;
 		this.weight = weight;
 		this.defaultRank = defaultRank;
 
@@ -126,7 +125,9 @@ public class Rank {
 
 		prefix = ChatColor.translateAlternateColorCodes('&', document.getString("prefix"));
 		suffix = ChatColor.translateAlternateColorCodes('&', document.getString("suffix"));
-		color = ChatColor.translateAlternateColorCodes('&', document.getString("color"));
+		if(document.getString("color") != null && !document.getString("color").isEmpty()) {
+			color = ChatColor.valueOf(document.getString("color"));
+		}
 		weight = document.getInteger("weight");
 		defaultRank = document.getBoolean("defaultRank");
 
@@ -145,7 +146,7 @@ public class Rank {
 		document.put("displayName", displayName);
 		document.put("prefix", prefix.replace(String.valueOf(ChatColor.COLOR_CHAR), "&"));
 		document.put("suffix", suffix.replace(String.valueOf(ChatColor.COLOR_CHAR), "&"));
-		document.put("color", color.replace(String.valueOf(ChatColor.COLOR_CHAR), "&"));
+		document.put("color", color.name());
 		document.put("weight", weight);
 		document.put("defaultRank", defaultRank);
 		document.put("permissions", SpicaCore.GSON.toJson(permissions));

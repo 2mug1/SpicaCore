@@ -21,6 +21,8 @@ public class NameTagHandler {
         return player.getName();
     }
 
+    /*
+
     public static void setTag(Player player, Player target, String prefix, String suffix, boolean showHealth) {
         Team team = player.getScoreboard().getTeam(getTeamName(target));
 
@@ -148,4 +150,5 @@ public class NameTagHandler {
         }
     }
 
+     */
 }

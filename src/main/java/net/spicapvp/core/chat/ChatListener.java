@@ -29,10 +29,12 @@ public class ChatListener extends StrappedListener {
 			switch (chatAttempt.getResponse()) {
 				case ALLOWED: {
 					Profile profile = Profile.getByUuid(event.getPlayer().getUniqueId());
-					event.setFormat((profile.isInClan() ? profile.getClan().getStyleTag() + " " : "") +
-							(profile.getPrefix() == null ? "" : ChatColor.translateAlternateColorCodes('&', profile.getPrefix())) +"%1$s" +
+					event.setFormat(
+							(profile.getPrefix() == null ? "" : ChatColor.translateAlternateColorCodes('&', profile.getPrefix())) +
+									Style.RESET +
+									profile.getActiveRank().getColor() + "%1$s" + Style.RESET +
 							(profile.getSuffix() == null ? "" : ChatColor.translateAlternateColorCodes('&', profile.getSuffix()))
-							+ Style.GRAY + ":" + Style.RESET + "%2$s");
+							+ Style.RESET + ": " + "%2$s");
 				}
 				break;
 				case MESSAGE_FILTERED: {

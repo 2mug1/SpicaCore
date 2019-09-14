@@ -17,7 +17,7 @@ public class SpicaAPI {
 
 	public static ChatColor getColorOfPlayer(Player player) {
 		Profile profile = Profile.getProfiles().get(player.getUniqueId());
-		return profile == null ? ChatColor.WHITE : ChatColor.getByChar(profile.getActiveRank().getColor());
+		return profile == null ? ChatColor.WHITE : profile.getActiveRank().getColor();
 	}
 
 	public static String getColoredName(Player player) {

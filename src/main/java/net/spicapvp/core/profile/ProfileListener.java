@@ -134,14 +134,6 @@ public class ProfileListener extends StrappedListener {
 					new Board(spicaCore, player, spicaCore.getBoardManager().getAdapter())
 			);
 		}
-
-		SpicaCore.get().getServer().getScheduler().runTaskLater(SpicaCore.get(), new Runnable() {
-			@Override
-			public void run() {
-				Profile profile = Profile.getByUuid(player.getUniqueId());
-				Bukkit.getOnlinePlayers().forEach(online -> profile.refreshNameTag(online, player, "", "", false));
-			}
-		}, 20L);
 	}
 
 	@EventHandler

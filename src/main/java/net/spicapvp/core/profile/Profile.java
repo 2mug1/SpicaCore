@@ -60,14 +60,20 @@ public class Profile {
 	@Getter private final List<Punishment> punishments;
 	@Getter @Setter private boolean loaded;
 	@Getter @Setter private Cooldown chatCooldown;
-	@Getter Experience experience;
-	@Getter Economy economy;
-	@Getter @Setter Long loginBonusTimestamp;
-	@Getter Friend friend;
-	@Setter String clanName;
-	@Getter @Setter long lastReported;
+	@Getter private Experience experience;
+	@Getter private Economy economy;
+	@Getter @Setter private Long loginBonusTimestamp;
+	@Getter private Friend friend;
+	@Setter private String clanName;
+	@Getter @Setter private long lastReported;
 
-	@Getter @Setter String prefix, suffix, currentPrefix, currentSuffix;
+	@Getter @Setter private String prefix, suffix;
+
+	@Getter @Setter private boolean registered;
+	@Getter @Setter private long lastRegisterCommand;
+	@Getter @Setter private String registerToken;
+	@Getter @Setter private long discord;
+	@Getter @Setter private String password;
 
 	public Profile(String username, UUID uuid) {
 		this.username = username;
@@ -250,6 +256,11 @@ public class Profile {
 			lastReported = document.getLong("lastReported");
 			prefix = document.getString("prefix");
 			suffix = document.getString("suffix");
+			lastRegisterCommand = document.getLong("lastRegisterCommand");
+			registered = document.getBoolean("registered");
+			registerToken = document.getString("registerToken");
+			discord = document.getLong("discord");
+			password = document.getString("password");
 
 			if(prefix == null){
 				this.prefix = "";
@@ -258,9 +269,6 @@ public class Profile {
 			if(suffix == null){
 				this.suffix = "";
 			}
-
-			this.currentPrefix = "";
-			this.currentSuffix = "";
 
 			//Options
 			Document optionsDocument = (Document) document.get("options");
@@ -331,9 +339,6 @@ public class Profile {
 			this.suffix = "";
 		}
 
-		this.currentPrefix = "";
-		this.currentSuffix = "";
-
 		Document document = new Document();
 		document.put("username", username);
 		document.put("uuid", uuid.toString());
@@ -350,6 +355,11 @@ public class Profile {
 		document.put("lastReported", lastReported);
 		document.put("prefix", prefix);
 		document.put("suffix", suffix);
+		document.put("lastRegisterCommand", lastRegisterCommand);
+		document.put("registered", registered);
+		document.put("registerToken", registerToken);
+		document.put("discord", discord);
+		document.put("password", password);
 
 		Document optionsDocument = new Document();
 		optionsDocument.put("publicChatEnabled", options.publicChatEnabled());
@@ -406,36 +416,9 @@ public class Profile {
 		SpicaCore.get().getMongo().getProfiles().replaceOne(Filters.eq("uuid", uuid.toString()), document, new ReplaceOptions().upsert(true));
 	}
 
-	public String getFormattedChatName(String playerName){
-		return (isInClan() ? getClan().getStyleTag() + " " : "") +
-				(getPrefix() == null ? "" : ChatColor.translateAlternateColorCodes('&', getPrefix())) +
-				Style.RESET + playerName + (getSuffix() == null ? "" : ChatColor.translateAlternateColorCodes('&', getSuffix()));
-	}
-
-	public void refreshNameTag(Player player, Player target, String customPrefix, String customSuffix, boolean showHealth) {
-		if(customPrefix != null){
-			this.currentPrefix = prefix + customPrefix;
-		}else{
-			this.currentPrefix = prefix;
-		}
-
-		if(customSuffix != null){
-			this.currentSuffix = suffix + customSuffix;
-		}else{
-			this.currentSuffix = suffix;
-		}
-
-		NameTagHandler.setTag(player, target, currentPrefix, currentSuffix, showHealth);
-	}
-
-	public void refreshNameTag(Player player, Player target, boolean showHealth) {
-		NameTagHandler.setTag(player, target, currentPrefix, currentSuffix, showHealth);
-	}
-
-	public String getCustomName(){
-		return Style.RESET + (currentPrefix == null ? "" : ChatColor.translateAlternateColorCodes('&', currentPrefix))
-				+ username +
-				(currentSuffix == null ? "" : ChatColor.translateAlternateColorCodes('&', currentSuffix));
+	public String getFormattedName(){
+		return (getPrefix() == null ? "" : ChatColor.translateAlternateColorCodes('&', getPrefix())) +
+				getActiveRank().getColor() + getPlayer().getName() + (getSuffix() == null ? "" : ChatColor.translateAlternateColorCodes('&', getSuffix()));
 	}
 
 	public static Profile getByUuid(UUID uuid) {

@@ -28,6 +28,9 @@ import net.spicapvp.core.friend.packet.PacketFriendJoinNetwork;
 import net.spicapvp.core.friend.packet.PacketFriendSendRequest;
 import net.spicapvp.core.grant.packet.PacketAddGrant;
 import net.spicapvp.core.grant.packet.PacketDeleteGrant;
+import net.spicapvp.core.profile.register.bot.RegisterBot;
+import net.spicapvp.core.profile.register.command.RegisterCommand;
+import net.spicapvp.core.profile.register.command.UnregisterCommand;
 import net.spicapvp.core.punishment.packet.PacketBroadcastPunishment;
 import net.spicapvp.core.rank.packet.PacketDeleteRank;
 import net.spicapvp.core.rank.packet.PacketRefreshRank;
@@ -192,8 +195,8 @@ public class SpicaCore extends JavaPlugin {
 				new PingCommand(),
 				new ListCommand(),
 				new LogsCommand(),
-				new ClanCommand(),
-				new ClanChatCommand(),
+				/* new ClanCommand(),
+				//new ClanChatCommand(),
 				new ClanCreateCommand(),
 				new ClanDisbandCommand(),
 				new ClanInfoCommand(),
@@ -202,7 +205,7 @@ public class SpicaCore extends JavaPlugin {
 				new ClanKickCommand(),
 				new ClanLeaveCommand(),
 				new ClanRoleCommand(),
-				new ClanTagCommand(),
+				new ClanTagCommand(), */
 				new ReportCommand(),
 				new AddPrefixCommand(),
 				new AddSuffixCommand(),

@@ -337,7 +337,6 @@ public class NetworkPacketListener implements PacketListener {
 		Player player = Bukkit.getPlayer(uuid);
 
 		if(player != null) {
-			Bukkit.getOnlinePlayers().forEach(online -> profile.refreshNameTag(online, player, null, null, false));
 
 			player.sendMessage("Prefixが追加されました");
 		}
@@ -354,7 +353,6 @@ public class NetworkPacketListener implements PacketListener {
 		Player player = Bukkit.getPlayer(uuid);
 
 		if(player != null) {
-			Bukkit.getOnlinePlayers().forEach(online -> profile.refreshNameTag(online, player, null, null, false));
 
 			player.sendMessage("Suffixが追加されました");
 		}
@@ -371,7 +369,6 @@ public class NetworkPacketListener implements PacketListener {
 		Player player = Bukkit.getPlayer(uuid);
 
 		if(player != null) {
-			Bukkit.getOnlinePlayers().forEach(online -> profile.refreshNameTag(online, player, null, null, false));
 
 			player.sendMessage("Prefixが設定されました");
 		}
@@ -388,7 +385,6 @@ public class NetworkPacketListener implements PacketListener {
 		Player player = Bukkit.getPlayer(uuid);
 
 		if(player != null) {
-			Bukkit.getOnlinePlayers().forEach(online -> profile.refreshNameTag(online, player, null, null, false));
 
 			player.sendMessage("Suffixが設定されました");
 		}
@@ -405,7 +401,6 @@ public class NetworkPacketListener implements PacketListener {
 		Player player = Bukkit.getPlayer(uuid);
 
 		if(player != null) {
-			Bukkit.getOnlinePlayers().forEach(online -> profile.refreshNameTag(online, player, null, null, false));
 
 			player.sendMessage("Prefixがリセットされました");
 		}
@@ -422,7 +417,6 @@ public class NetworkPacketListener implements PacketListener {
 		Player player = Bukkit.getPlayer(uuid);
 
 		if(player != null) {
-			Bukkit.getOnlinePlayers().forEach(online -> profile.refreshNameTag(online, player, null, null, false));
 
 			player.sendMessage("Suffixがリセットされました");
 		}
