@@ -3,8 +3,6 @@ package net.spicapvp.core.profile;
 import net.spicapvp.core.Locale;
 import net.spicapvp.core.SpicaCore;
 import net.spicapvp.core.board.Board;
-import net.spicapvp.core.nametag.NameTagHandler;
-import net.spicapvp.core.socket.SpicaServerStatus;
 import net.spicapvp.core.strap.StrappedListener;
 import net.spicapvp.core.cache.RedisPlayerData;
 import net.spicapvp.core.staff.packet.PacketStaffChat;

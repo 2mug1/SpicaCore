@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.spicapvp.core.SpicaCore;
 import net.spicapvp.core.clan.Clan;
-import net.spicapvp.core.nametag.NameTagHandler;
 import net.spicapvp.core.profile.conversation.ProfileConversations;
 import net.spicapvp.core.friend.Friend;
 import net.spicapvp.core.grant.event.GrantAppliedEvent;
@@ -30,7 +29,6 @@ import java.util.Map;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
-import net.spicapvp.core.util.Style;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bukkit.Bukkit;
@@ -39,7 +37,6 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
-import org.bukkit.scoreboard.Team;
 
 public class Profile {
 

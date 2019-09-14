@@ -14,7 +14,6 @@ import net.spicapvp.core.friend.packet.PacketFriendJoinNetwork;
 import net.spicapvp.core.friend.packet.PacketFriendSendRequest;
 import net.spicapvp.core.grant.packet.PacketAddGrant;
 import net.spicapvp.core.grant.packet.PacketDeleteGrant;
-import net.spicapvp.core.nametag.NameTagHandler;
 import net.spicapvp.core.nametag.packet.*;
 import net.spicapvp.core.punishment.packet.PacketBroadcastPunishment;
 import net.spicapvp.core.rank.packet.PacketDeleteRank;
