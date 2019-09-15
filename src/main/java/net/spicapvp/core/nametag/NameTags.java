@@ -31,6 +31,25 @@ public class NameTags {
 		NameTags.color(viewer, target, SpicaAPI.getColorOfPlayer(target).toString(), null, showHealth);
 	}
 
+	public static void handle(Player viewer, String prefix, String suffix, boolean showHealth) {
+		for (Player target : Bukkit.getOnlinePlayers()) {
+			handle(viewer, target, prefix, suffix, showHealth);
+		}
+	}
+
+	public static void handle(Player viewer, Player target,  String prefix, String suffix, boolean showHealth) {
+		if (viewer == null || target == null) {
+			return;
+		}
+
+		if (viewer.equals(target)) {
+			NameTags.color(viewer, target, prefix, suffix, showHealth);
+			return;
+		}
+
+		NameTags.color(viewer, target, prefix, suffix, showHealth);
+	}
+
 	public static void color(Player viewer, Player target, String prefix, String suffix, boolean showHealth) {
 		if(viewer == null || target == null){
 			return;

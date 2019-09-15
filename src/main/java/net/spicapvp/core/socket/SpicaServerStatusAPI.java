@@ -15,8 +15,15 @@ public class SpicaServerStatusAPI {
     @Getter
     private final static Map<String, SpicaServerStatus> servers = new HashMap<>();
 
+    private static int totalOnline = 0;
+
     public static void init(JavaPlugin plugin) {
-        plugin.getServer().getScheduler().runTaskTimer(plugin, () -> servers.values().forEach(SpicaServerStatus::refresh), 0L, 10L);
+        plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
+            servers.values().forEach(SpicaServerStatus::refresh);
+            int count = servers.values().stream().filter(SpicaServerStatus::isServerUp).mapToInt(SpicaServerStatus::getCurrentPlayers).sum();
+            count += Bukkit.getOnlinePlayers().size();
+            totalOnline = count;
+        }, 0L, 20L);
     }
 
     public static void register(String name, String address, int port) {
@@ -28,11 +35,7 @@ public class SpicaServerStatusAPI {
     }
 
     public static int getTotalOnline() {
-        int count = servers.values().stream().filter(SpicaServerStatus::isServerUp).mapToInt(SpicaServerStatus::getCurrentPlayers).sum();
-
-        count += Bukkit.getOnlinePlayers().size();
-
-        return count;
+        return totalOnline;
     }
 
     public static Map<String, SpicaServerStatus> getFilteredServers(String filterName) {
