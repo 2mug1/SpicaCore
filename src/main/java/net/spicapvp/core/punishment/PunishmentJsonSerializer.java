@@ -8,7 +8,7 @@ public class PunishmentJsonSerializer implements JsonSerializer<Punishment> {
 	@Override
 	public JsonObject serialize(Punishment punishment) {
 		JsonObject object = new JsonObject();
-		object.addProperty("uuid", punishment.getUuid().toString());
+		object.addProperty("id", punishment.getId());
 		object.addProperty("type", punishment.getType().name());
 		object.addProperty("addedBy", punishment.getAddedBy() == null ? null : punishment.getAddedBy().toString());
 		object.addProperty("addedAt", punishment.getAddedAt());

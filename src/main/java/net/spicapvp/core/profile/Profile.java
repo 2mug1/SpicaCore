@@ -66,12 +66,6 @@ public class Profile {
 
 	@Getter @Setter private String prefix, suffix;
 
-	@Getter @Setter private boolean registered;
-	@Getter @Setter private long lastRegisterCommand;
-	@Getter @Setter private String registerToken;
-	@Getter @Setter private long discord;
-	@Getter @Setter private String password;
-
 	public Profile(String username, UUID uuid) {
 		this.username = username;
 		this.uuid = uuid;
@@ -253,11 +247,6 @@ public class Profile {
 			lastReported = document.getLong("lastReported");
 			prefix = document.getString("prefix");
 			suffix = document.getString("suffix");
-			lastRegisterCommand = document.getLong("lastRegisterCommand");
-			registered = document.getBoolean("registered");
-			registerToken = document.getString("registerToken");
-			discord = document.getLong("discord");
-			password = document.getString("password");
 
 			if(prefix == null){
 				this.prefix = "";
@@ -352,11 +341,6 @@ public class Profile {
 		document.put("lastReported", lastReported);
 		document.put("prefix", prefix);
 		document.put("suffix", suffix);
-		document.put("lastRegisterCommand", lastRegisterCommand);
-		document.put("registered", registered);
-		document.put("registerToken", registerToken);
-		document.put("discord", discord);
-		document.put("password", password);
 
 		Document optionsDocument = new Document();
 		optionsDocument.put("publicChatEnabled", options.publicChatEnabled());

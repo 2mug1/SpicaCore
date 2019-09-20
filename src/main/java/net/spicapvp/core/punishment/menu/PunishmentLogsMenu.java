@@ -32,19 +32,9 @@ public class PunishmentLogsMenu extends PaginatedMenu {
     }
 
     private void load() {
-        for (Document document : SpicaCore.get().getMongo().getProfiles().find()) {
-            JsonArray punishmentList = new JsonParser().parse(document.getString("punishments")).getAsJsonArray();
-
-            for (JsonElement punishmentData : punishmentList) {
-
-                Punishment punishment = Punishment.DESERIALIZER.deserialize(punishmentData.getAsJsonObject());
-
-                if (punishment != null) {
-                    punishments.put(punishment, Profile.getByUuid(UUID.fromString(document.getString("uuid"))));
-                }
-            }
-        }
+        punishments = Punishment.getPunishments();
     }
+
     @Override
     public String getPrePaginatedTitle(Player player) {
         return Style.GOLD + "Punishment Logs (" + punishments.size() + ")";

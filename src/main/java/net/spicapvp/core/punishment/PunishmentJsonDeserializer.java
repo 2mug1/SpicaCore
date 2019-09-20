@@ -9,7 +9,7 @@ public class PunishmentJsonDeserializer implements JsonDeserializer<Punishment> 
 	@Override
 	public Punishment deserialize(JsonObject object) {
 		Punishment punishment = new Punishment(
-				UUID.fromString(object.get("uuid").getAsString()),
+				object.get("id").getAsLong(),
 				PunishmentType.valueOf(object.get("type").getAsString()),
 				object.get("addedAt").getAsLong(),
 				object.get("addedReason").getAsString(),

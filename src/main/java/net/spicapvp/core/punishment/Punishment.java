@@ -1,11 +1,19 @@
 package net.spicapvp.core.punishment;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import net.spicapvp.core.SpicaCore;
+import net.spicapvp.core.profile.Profile;
 import net.spicapvp.core.util.Style;
 import net.spicapvp.core.util.TimeUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.Document;
 import org.bukkit.Bukkit;
 
 public class Punishment {
@@ -13,7 +21,7 @@ public class Punishment {
 	public static PunishmentJsonSerializer SERIALIZER = new PunishmentJsonSerializer();
 	public static PunishmentJsonDeserializer DESERIALIZER = new PunishmentJsonDeserializer();
 
-	@Getter private final UUID uuid;
+	@Getter private final long id;
 	@Getter private final PunishmentType type;
 	@Getter @Setter private UUID addedBy;
 	@Getter final private long addedAt;
@@ -24,8 +32,8 @@ public class Punishment {
 	@Getter @Setter private String removedReason;
 	@Getter @Setter private boolean removed;
 
-	public Punishment(UUID uuid, PunishmentType type, long addedAt, String addedReason, long duration) {
-		this.uuid = uuid;
+	public Punishment(long id, PunishmentType type, long addedAt, String addedReason, long duration) {
+		this.id = id;
 		this.type = type;
 		this.addedAt = addedAt;
 		this.addedReason = addedReason;
@@ -127,7 +135,25 @@ public class Punishment {
 
 	@Override
 	public boolean equals(Object object) {
-		return object != null && object instanceof Punishment && ((Punishment) object).uuid.equals(uuid);
+		return object != null && object instanceof Punishment && ((Punishment) object).id == id;
 	}
 
+	public static Map<Punishment, Profile> getPunishments(){
+		Map<Punishment, Profile> punishments = new HashMap<>();
+
+		for (Document document : SpicaCore.get().getMongo().getProfiles().find()) {
+			JsonArray punishmentList = new JsonParser().parse(document.getString("punishments")).getAsJsonArray();
+
+			for (JsonElement punishmentData : punishmentList) {
+
+				Punishment punishment = Punishment.DESERIALIZER.deserialize(punishmentData.getAsJsonObject());
+
+				if (punishment != null) {
+					punishments.put(punishment, Profile.getByUuid(UUID.fromString(document.getString("uuid"))));
+				}
+			}
+		}
+
+		return punishments;
+	}
 }
