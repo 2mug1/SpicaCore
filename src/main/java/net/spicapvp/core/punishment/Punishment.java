@@ -141,8 +141,10 @@ public class Punishment {
 	public static Map<Punishment, Profile> getPunishments(){
 		Map<Punishment, Profile> punishments = new HashMap<>();
 
+		JsonParser jsonParser = new JsonParser();
+
 		for (Document document : SpicaCore.get().getMongo().getProfiles().find()) {
-			JsonArray punishmentList = new JsonParser().parse(document.getString("punishments")).getAsJsonArray();
+			JsonArray punishmentList = jsonParser.parse(document.getString("punishments")).getAsJsonArray();
 
 			for (JsonElement punishmentData : punishmentList) {
 
@@ -155,5 +157,17 @@ public class Punishment {
 		}
 
 		return punishments;
+	}
+
+	public static long getCurrentPunishmentSize(){
+		int size = 0;
+
+		JsonParser jsonParser = new JsonParser();
+
+		for (Document document : SpicaCore.get().getMongo().getProfiles().find()) {
+			size+=jsonParser.parse(document.getString("punishments")).getAsJsonArray().size();
+		}
+
+		return size;
 	}
 }

@@ -28,7 +28,7 @@ public class WarnCommand {
 		String staffName = sender instanceof Player ? Profile.getProfiles().get(((Player) sender)
 				.getUniqueId()).getColoredUsername() : Style.DARK_RED + "Console";
 
-		Punishment punishment = new Punishment(Punishment.getPunishments().size() + 1, PunishmentType.WARN, System.currentTimeMillis(), reason, -1);
+		Punishment punishment = new Punishment(Punishment.getCurrentPunishmentSize() + 1, PunishmentType.WARN, System.currentTimeMillis(), reason, -1);
 
 		if (sender instanceof Player) {
 			punishment.setAddedBy(((Player) sender).getUniqueId());

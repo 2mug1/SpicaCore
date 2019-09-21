@@ -38,7 +38,7 @@ public class MuteCommand {
 		String staffName = sender instanceof Player ? Profile.getProfiles().get(((Player) sender)
 				.getUniqueId()).getColoredUsername() : Style.DARK_RED + "Console";
 
-		Punishment punishment = new Punishment(Punishment.getPunishments().size() + 1, PunishmentType.MUTE, System.currentTimeMillis(),
+		Punishment punishment = new Punishment(Punishment.getCurrentPunishmentSize() + 1, PunishmentType.MUTE, System.currentTimeMillis(),
 				reason, duration.getValue());
 
 		if (sender instanceof Player) {
