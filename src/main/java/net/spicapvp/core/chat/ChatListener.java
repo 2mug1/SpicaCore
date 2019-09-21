@@ -46,10 +46,9 @@ public class ChatListener extends StrappedListener {
 					event.setCancelled(true);
 
 					if (chatAttempt.getPunishment().isPermanent()) {
-						event.getPlayer().sendMessage(Style.RED + "You are muted for forever.");
+						event.getPlayer().sendMessage(Style.RED + "You are muted for forever." + Style.GRAY + " (Reason: " + chatAttempt.getPunishment().getAddedReason() +  ")" + Style.YELLOW + " https://spicapvp.net/punishment/" + chatAttempt.getPunishment().getId());
 					} else {
-						event.getPlayer().sendMessage(Style.RED + "You are muted for another " +
-								chatAttempt.getPunishment().getTimeRemaining() + ".");
+						event.getPlayer().sendMessage(Style.RED + "You are muted for another " + chatAttempt.getPunishment().getTimeRemaining() + "." +  Style.GRAY + " (Reason: " + chatAttempt.getPunishment().getAddedReason() +  ")" + Style.YELLOW + " https://spicapvp.net/punishment/" + chatAttempt.getPunishment().getId() );
 					}
 				}
 				break;

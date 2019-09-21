@@ -121,11 +121,15 @@ public class Punishment {
 			}
 
 			kickMessage = kickMessage.replace("{context}", getContext())
-			                         .replace("{temporary}", temporary);
+			                         .replace("{temporary}", temporary)
+					                 .replace("{reason}", addedReason)
+									 .replace("{id}", Long.toString(id));
+
 		} else if (type == PunishmentType.KICK) {
 			kickMessage = SpicaCore.get().getMainConfig().getString("PUNISHMENTS.KICK.KICK")
 			                  .replace("{context}", getContext())
-			                  .replace("{reason}", addedReason);
+			                  .replace("{reason}", addedReason)
+					          .replace("{id}", Long.toString(id));
 		} else {
 			kickMessage = null;
 		}

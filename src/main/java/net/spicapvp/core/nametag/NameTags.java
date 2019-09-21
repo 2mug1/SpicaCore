@@ -51,7 +51,7 @@ public class NameTags {
 	}
 
 	public static void color(Player viewer, Player target, String prefix, String suffix, boolean showHealth) {
-		if(viewer == null || target == null){
+		if (viewer == null || target == null) {
 			return;
 		}
 
@@ -67,15 +67,15 @@ public class NameTags {
 			team = viewer.getScoreboard().registerNewTeam(getTeamName(target));
 		}
 
-		if(prefix != null && !prefix.isEmpty()){
+		if (prefix != null && !prefix.isEmpty()) {
 			team.setPrefix(prefix);
-		}else{
+		} else {
 			team.setPrefix("");
 		}
 
-		if(suffix != null && !suffix.isEmpty()){
+		if (suffix != null && !suffix.isEmpty()) {
 			team.setSuffix(suffix);
-		}else{
+		} else {
 			team.setSuffix("");
 		}
 
@@ -83,18 +83,18 @@ public class NameTags {
 			reset(viewer, target);
 
 			team.addEntry(target.getName());
+		}
 
-			if (showHealth) {
-				Objective objective = viewer.getScoreboard().getObjective(DisplaySlot.BELOW_NAME);
+		if (showHealth) {
+			Objective objective = viewer.getScoreboard().getObjective(DisplaySlot.BELOW_NAME);
 
-				if (objective == null) {
-					objective = viewer.getScoreboard().registerNewObjective("showhealth", "health");
-				}
-
-				objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
-				objective.setDisplayName(Style.RED + StringEscapeUtils.unescapeJava("\u2764"));
-				objective.getScore(target.getName()).setScore((int) Math.floor(target.getHealth() / 2));
+			if (objective == null) {
+				objective = viewer.getScoreboard().registerNewObjective("showhealth", "health");
 			}
+
+			objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
+			objective.setDisplayName(Style.RED + StringEscapeUtils.unescapeJava("\u2764"));
+			objective.getScore(target.getName()).setScore((int) Math.floor(target.getHealth() / 2));
 		}
 
 		viewer.setScoreboard(scoreboard);
