@@ -11,7 +11,6 @@ import net.spicapvp.core.chat.ChatListener;
 import net.spicapvp.core.chat.command.SlowChatCommand;
 import net.spicapvp.core.clan.ClanPlayerRole;
 import net.spicapvp.core.clan.ClanPlayerRoleTypeAdapter;
-import net.spicapvp.core.clan.command.*;
 import net.spicapvp.core.clan.packet.*;
 import net.spicapvp.core.convenient.packet.PacketClickableBroadcast;
 import net.spicapvp.core.fix.EnderpearlFixListener;
@@ -192,8 +191,7 @@ public class SpicaCore extends JavaPlugin {
 				new ToggleSoundsCommand(),
 				new PingCommand(),
 				new ListCommand(),
-				new LogsCommand(),
-				new ClearPunishmentsCommand(),
+				new HistoryCommand(),
 				/* new ClanCommand(),
 				//new ClanChatCommand(),
 				new ClanCreateCommand(),
@@ -211,7 +209,8 @@ public class SpicaCore extends JavaPlugin {
 				new SetPrefixCommand(),
 				new SetSuffixCommand(),
 				new ResetPrefixCommand(),
-				new ResetSuffixCommand()
+				new ResetSuffixCommand(),
+				new ClearPunishmentsCommand()
 		).forEach(honcho::registerCommand);
 
 		honcho.registerTypeAdapter(Rank.class, new RankTypeAdapter());

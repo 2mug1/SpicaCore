@@ -5,9 +5,9 @@ import net.spicapvp.core.punishment.menu.PunishmentLogsMenu;
 import org.bukkit.entity.Player;
 
 @CommandMeta(label = "history",  permission = "spicaCore.staff.history", async = true)
-public class LogsCommand {
+public class HistoryCommand {
 
     public void execute(Player player) {
-        new PunishmentLogsMenu().openMenu(player, 54);
+        new PunishmentLogsMenu().openMenu(player);
     }
 }
