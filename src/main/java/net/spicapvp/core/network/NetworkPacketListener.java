@@ -16,6 +16,7 @@ import net.spicapvp.core.grant.packet.PacketAddGrant;
 import net.spicapvp.core.grant.packet.PacketDeleteGrant;
 import net.spicapvp.core.nametag.packet.*;
 import net.spicapvp.core.punishment.packet.PacketBroadcastPunishment;
+import net.spicapvp.core.punishment.packet.PacketClearPunishments;
 import net.spicapvp.core.rank.packet.PacketDeleteRank;
 import net.spicapvp.core.rank.packet.PacketRefreshRank;
 import net.spicapvp.core.pidgin.packet.handler.IncomingPacketHandler;
@@ -337,7 +338,7 @@ public class NetworkPacketListener implements PacketListener {
 
 		if(player != null) {
 
-			player.sendMessage("Prefixが追加されました");
+			player.sendMessage("Added one to your prefix.");
 		}
 	}
 
@@ -353,7 +354,7 @@ public class NetworkPacketListener implements PacketListener {
 
 		if(player != null) {
 
-			player.sendMessage("Suffixが追加されました");
+			player.sendMessage("Added one to your suffix.");
 		}
 	}
 
@@ -369,7 +370,7 @@ public class NetworkPacketListener implements PacketListener {
 
 		if(player != null) {
 
-			player.sendMessage("Prefixが設定されました");
+			player.sendMessage("Your prefix has been updated.");
 		}
 	}
 
@@ -385,7 +386,7 @@ public class NetworkPacketListener implements PacketListener {
 
 		if(player != null) {
 
-			player.sendMessage("Suffixが設定されました");
+			player.sendMessage("Your suffix has been updated.");
 		}
 	}
 
@@ -401,7 +402,7 @@ public class NetworkPacketListener implements PacketListener {
 
 		if(player != null) {
 
-			player.sendMessage("Prefixがリセットされました");
+			player.sendMessage("Your prefix has been reset.");
 		}
 	}
 
@@ -417,7 +418,23 @@ public class NetworkPacketListener implements PacketListener {
 
 		if(player != null) {
 
-			player.sendMessage("Suffixがリセットされました");
+			player.sendMessage("Your suffix has been reset.");
+		}
+	}
+
+	@IncomingPacketHandler
+	public void onPacketClearPunishments(PacketClearPunishments packet){
+		UUID uuid = packet.getUuid();
+
+		Profile profile = Profile.getByUuid(uuid);
+		profile.getPunishments().clear();
+		profile.save();
+
+		Player player = Bukkit.getPlayer(uuid);
+
+		if(player != null){
+
+			player.sendMessage(Style.GREEN + "Your punishment history has been all removed.");
 		}
 	}
 }

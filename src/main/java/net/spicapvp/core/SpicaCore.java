@@ -29,6 +29,7 @@ import net.spicapvp.core.friend.packet.PacketFriendSendRequest;
 import net.spicapvp.core.grant.packet.PacketAddGrant;
 import net.spicapvp.core.grant.packet.PacketDeleteGrant;
 import net.spicapvp.core.punishment.packet.PacketBroadcastPunishment;
+import net.spicapvp.core.punishment.packet.PacketClearPunishments;
 import net.spicapvp.core.rank.packet.PacketDeleteRank;
 import net.spicapvp.core.rank.packet.PacketRefreshRank;
 import net.spicapvp.core.pidgin.Pidgin;
@@ -192,6 +193,7 @@ public class SpicaCore extends JavaPlugin {
 				new PingCommand(),
 				new ListCommand(),
 				new LogsCommand(),
+				new ClearPunishmentsCommand(),
 				/* new ClanCommand(),
 				//new ClanChatCommand(),
 				new ClanCreateCommand(),
@@ -254,7 +256,8 @@ public class SpicaCore extends JavaPlugin {
 				PacketResetPrefix.class,
 				PacketResetSuffix.class,
 				PacketSetPrefix.class,
-				PacketSetSuffix.class
+				PacketSetSuffix.class,
+				PacketClearPunishments.class
 		).forEach(pidgin::registerPacket);
 
 		pidgin.registerListener(new NetworkPacketListener(this));
