@@ -42,7 +42,7 @@ public class WarnCommand {
 		if (player != null) {
 			String senderName = sender instanceof Player ? Profile.getProfiles().get(((Player) sender).getUniqueId()).getColoredUsername() : Style.DARK_RED + "Console";
 			player.sendMessage(Style.RED + "You have been warned by " + senderName + Style.RED + ".");
-			player.sendMessage(Style.RED + "The reason for this punishment: " + Style.WHITE + punishment.getAddedReason());
+			player.sendMessage(Style.RED + "Reason: " + Style.RESET + punishment.getAddedReason());
 			player.sendMessage(Style.RED + "https://spicapvp.net/punishment/" + punishment.getId());
 		}
 

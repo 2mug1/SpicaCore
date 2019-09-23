@@ -6,6 +6,7 @@ import net.spicapvp.core.chat.filter.ChatFilter;
 import net.spicapvp.core.profile.Profile;
 import net.spicapvp.core.punishment.PunishmentType;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.spicapvp.core.util.Cooldown;

@@ -23,7 +23,7 @@ public class SpicaServerStatusAPI {
             int count = servers.values().stream().filter(SpicaServerStatus::isServerUp).mapToInt(SpicaServerStatus::getCurrentPlayers).sum();
             count += Bukkit.getOnlinePlayers().size();
             totalOnline = count;
-        }, 0L, 20L);
+        }, 0L, 60L);
     }
 
     public static void register(String name, String address, int port) {

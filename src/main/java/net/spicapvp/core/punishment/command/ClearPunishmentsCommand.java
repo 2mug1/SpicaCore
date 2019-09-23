@@ -24,6 +24,6 @@ public class ClearPunishmentsCommand {
 
         SpicaCore.get().getPidgin().sendPacket(new PacketClearPunishments(profile.getUuid()));
 
-        sender.sendMessage(Style.GREEN + profile.getUsername() + "'s punishment history has been all removed.");
+        sender.sendMessage(profile.getActiveRank().getColor() +  profile.getUsername() + Style.GREEN + "'s punishment history has been all removed.");
     }
 }

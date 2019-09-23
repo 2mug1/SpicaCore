@@ -10,6 +10,8 @@ import net.spicapvp.core.profile.conversation.ProfileConversations;
 import net.spicapvp.core.friend.Friend;
 import net.spicapvp.core.grant.event.GrantAppliedEvent;
 import net.spicapvp.core.grant.event.GrantExpireEvent;
+import net.spicapvp.core.profile.experience.ExpBooster;
+import net.spicapvp.core.profile.experience.Experience;
 import net.spicapvp.core.profile.option.ProfileOptions;
 import net.spicapvp.core.profile.staff.ProfileStaffOptions;
 import net.spicapvp.core.punishment.Punishment;
@@ -40,6 +42,8 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 
 public class Profile {
 
+	private static final JsonParser JSON_PARSER = new JsonParser();
+
 	@Getter private static Map<UUID, Profile> profiles = new HashMap<>();
 
 	@Getter @Setter private String username;
@@ -63,6 +67,7 @@ public class Profile {
 	@Getter private Friend friend;
 	@Setter private String clanName;
 	@Getter @Setter private long lastReported;
+	@Getter @Setter private ExpBooster expBooster;
 
 	@Getter @Setter private String prefix, suffix;
 
@@ -248,6 +253,10 @@ public class Profile {
 			prefix = document.getString("prefix");
 			suffix = document.getString("suffix");
 
+			if(document.getString("expBooster") != null){
+				expBooster = ExpBooster.DESERIALIZER.deserialize(JSON_PARSER.parse(document.getString("expBooster")).getAsJsonObject());
+			}
+
 			if(prefix == null){
 				this.prefix = "";
 			}
@@ -264,21 +273,22 @@ public class Profile {
 
 			//Friends
 			Document friendsDocument = (Document) document.get("friends");
-			JsonArray receivingPlayersUUID = new JsonParser().parse(friendsDocument.getString("receivingPlayersUUID")).getAsJsonArray();
+			JsonArray receivingPlayersUUID = JSON_PARSER.parse(friendsDocument.getString("receivingPlayersUUID")).getAsJsonArray();
 			for (JsonElement element : receivingPlayersUUID) {
 				String uuid = element.getAsJsonObject().get("uuid").getAsString();
 				if(uuid != null) {
 					friend.getReceivingPlayersUUID().add(uuid);
 				}
 			}
-			JsonArray requestingPlayersUUID = new JsonParser().parse(friendsDocument.getString("requestingPlayersUUID")).getAsJsonArray();
+
+			JsonArray requestingPlayersUUID = JSON_PARSER.parse(friendsDocument.getString("requestingPlayersUUID")).getAsJsonArray();
 			for (JsonElement element : requestingPlayersUUID) {
 				String uuid = element.getAsJsonObject().get("uuid").getAsString();
 				if(uuid != null) {
 					friend.getRequestingPlayersUUID().add(uuid);
 				}
 			}
-			JsonArray acceptedPlayersUUID = new JsonParser().parse(friendsDocument.getString("acceptedPlayersUUID")).getAsJsonArray();
+			JsonArray acceptedPlayersUUID = JSON_PARSER.parse(friendsDocument.getString("acceptedPlayersUUID")).getAsJsonArray();
 			for (JsonElement element : acceptedPlayersUUID) {
 				String uuid = element.getAsJsonObject().get("uuid").getAsString();
 				if(uuid != null) {
@@ -287,7 +297,7 @@ public class Profile {
 			}
 
 			//Grants
-			JsonArray grantList = new JsonParser().parse(document.getString("grants")).getAsJsonArray();
+			JsonArray grantList = JSON_PARSER.parse(document.getString("grants")).getAsJsonArray();
 			for (JsonElement grantData : grantList) {
 				// Transform into a Grant object
 				Grant grant = Grant.DESERIALIZER.deserialize(grantData.getAsJsonObject());
@@ -296,7 +306,7 @@ public class Profile {
 				}
 			}
 
-			JsonArray punishmentList = new JsonParser().parse(document.getString("punishments")).getAsJsonArray();
+			JsonArray punishmentList = JSON_PARSER.parse(document.getString("punishments")).getAsJsonArray();
 			for (JsonElement punishmentData : punishmentList) {
 				Punishment punishment = Punishment.DESERIALIZER.deserialize(punishmentData.getAsJsonObject());
 				if (punishment != null) {
@@ -341,6 +351,13 @@ public class Profile {
 		document.put("lastReported", lastReported);
 		document.put("prefix", prefix);
 		document.put("suffix", suffix);
+
+
+		if(expBooster != null) {
+			document.put("expBooster", ExpBooster.SERIALIZER.serialize(expBooster).toString());
+		}else{
+			document.put("expBooster", null);
+		}
 
 		Document optionsDocument = new Document();
 		optionsDocument.put("publicChatEnabled", options.publicChatEnabled());

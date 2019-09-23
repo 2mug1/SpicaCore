@@ -27,6 +27,9 @@ import net.spicapvp.core.friend.packet.PacketFriendJoinNetwork;
 import net.spicapvp.core.friend.packet.PacketFriendSendRequest;
 import net.spicapvp.core.grant.packet.PacketAddGrant;
 import net.spicapvp.core.grant.packet.PacketDeleteGrant;
+import net.spicapvp.core.profile.experience.command.ExpBoosterCommand;
+import net.spicapvp.core.profile.experience.packet.PacketExpBoosterApply;
+import net.spicapvp.core.profile.experience.packet.PacketExpBoosterRemove;
 import net.spicapvp.core.punishment.packet.PacketBroadcastPunishment;
 import net.spicapvp.core.punishment.packet.PacketClearPunishments;
 import net.spicapvp.core.rank.packet.PacketDeleteRank;
@@ -210,7 +213,8 @@ public class SpicaCore extends JavaPlugin {
 				new SetSuffixCommand(),
 				new ResetPrefixCommand(),
 				new ResetSuffixCommand(),
-				new ClearPunishmentsCommand()
+				new ClearPunishmentsCommand(),
+				new ExpBoosterCommand()
 		).forEach(honcho::registerCommand);
 
 		honcho.registerTypeAdapter(Rank.class, new RankTypeAdapter());
@@ -256,7 +260,9 @@ public class SpicaCore extends JavaPlugin {
 				PacketResetSuffix.class,
 				PacketSetPrefix.class,
 				PacketSetSuffix.class,
-				PacketClearPunishments.class
+				PacketClearPunishments.class,
+				PacketExpBoosterApply.class,
+				PacketExpBoosterRemove.class
 		).forEach(pidgin::registerPacket);
 
 		pidgin.registerListener(new NetworkPacketListener(this));

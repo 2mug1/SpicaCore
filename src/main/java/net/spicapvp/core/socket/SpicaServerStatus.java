@@ -10,7 +10,7 @@ import java.net.*;
 public class SpicaServerStatus {
 
     public static final byte NUM_FIELDS = 6;
-    public static final int DEFAULT_TIMEOUT = 5;
+    public static final int DEFAULT_TIMEOUT = 10;
 
     private String address;
     private int port;

@@ -15,6 +15,9 @@ import net.spicapvp.core.friend.packet.PacketFriendSendRequest;
 import net.spicapvp.core.grant.packet.PacketAddGrant;
 import net.spicapvp.core.grant.packet.PacketDeleteGrant;
 import net.spicapvp.core.nametag.packet.*;
+import net.spicapvp.core.profile.experience.ExpBooster;
+import net.spicapvp.core.profile.experience.packet.PacketExpBoosterApply;
+import net.spicapvp.core.profile.experience.packet.PacketExpBoosterRemove;
 import net.spicapvp.core.punishment.packet.PacketBroadcastPunishment;
 import net.spicapvp.core.punishment.packet.PacketClearPunishments;
 import net.spicapvp.core.rank.packet.PacketDeleteRank;
@@ -437,4 +440,43 @@ public class NetworkPacketListener implements PacketListener {
 			player.sendMessage(Style.GREEN + "Your punishment history has been all removed.");
 		}
 	}
+
+	@IncomingPacketHandler
+	public void onPacketExpBoosterApply(PacketExpBoosterApply packet){
+		ExpBooster expBooster = packet.getExpBooster();
+		Profile profile = Profile.getByUuid(packet.getUuid());
+
+		profile.setExpBooster(expBooster);
+		profile.save();
+
+		Player player = Bukkit.getPlayer(packet.getUuid());
+
+		if(player != null){
+
+			player.sendMessage(Style.GREEN + "A new exp booster" + Style.GRAY + "(" + expBooster.getIncreaseRate() + "x) "  + Style.GREEN + "has been applied to your profile.");
+		}
+	}
+
+	@IncomingPacketHandler
+	public void onPacketExpBoosterRemove(PacketExpBoosterRemove packet){
+		Profile profile = Profile.getByUuid(packet.getTarget());
+
+		ExpBooster expBooster = profile.getExpBooster();
+		expBooster.setRemoved(true);
+		expBooster.setRemovedBy(packet.getRemovedBy());
+		expBooster.setRemovedAt(packet.getRemovedAt());
+		expBooster.setRemovedReason(packet.getRemovedReason());
+
+		profile.setExpBooster(expBooster);
+		profile.save();
+
+		Player player = Bukkit.getPlayer(packet.getTarget());
+
+		if(player != null){
+
+			player.sendMessage(Style.GREEN + "Your exp booster has been removed.");
+		}
+	}
+
+
 }

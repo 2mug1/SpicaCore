@@ -37,7 +37,7 @@ public class PacketBroadcastPunishment implements Packet {
 	@Override
 	public JsonObject serialize() {
 		return new JsonChain()
-				.add("packet", Punishment.SERIALIZER.serialize(punishment))
+				.add("punishment", Punishment.SERIALIZER.serialize(punishment))
 				.addProperty("staff", staff)
 				.addProperty("target", target)
 				.addProperty("targetUuid", targetUuid.toString())
@@ -48,7 +48,7 @@ public class PacketBroadcastPunishment implements Packet {
 
 	@Override
 	public void deserialize(JsonObject object) {
-		punishment = Punishment.DESERIALIZER.deserialize(object.get("packet").getAsJsonObject());
+		punishment = Punishment.DESERIALIZER.deserialize(object.get("punishment").getAsJsonObject());
 		staff = object.get("staff").getAsString();
 		target = object.get("target").getAsString();
 		targetUuid = UUID.fromString(object.get("targetUuid").getAsString());

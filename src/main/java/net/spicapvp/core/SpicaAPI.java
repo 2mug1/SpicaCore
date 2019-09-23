@@ -1,7 +1,7 @@
 package net.spicapvp.core;
 
 import net.spicapvp.core.profile.Economy;
-import net.spicapvp.core.profile.Experience;
+import net.spicapvp.core.profile.experience.Experience;
 import net.spicapvp.core.profile.Profile;
 import net.spicapvp.core.rank.Rank;
 import org.bukkit.ChatColor;
