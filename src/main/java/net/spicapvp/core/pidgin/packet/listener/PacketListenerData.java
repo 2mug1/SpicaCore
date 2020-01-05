@@ -6,11 +6,6 @@ import net.spicapvp.core.pidgin.packet.Packet;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-/**
- * A wrapper class that holds all the information needed to
- * identify and execute a message function.
- *
- */
 @AllArgsConstructor
 @Getter
 public class PacketListenerData {
